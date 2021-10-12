@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Grethania';
+    src: url('../../static/fonts/Grethania Script Reguler.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../static/fonts/Montserrat-Regular.ttf');
+}
+
 body {
     height: 100%;
+}
+
+p {
+    font-family: 'Montserrat';
 }
