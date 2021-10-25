@@ -49,6 +49,13 @@
     color: black !important;
 }
 
+.nav-item:hover {
+    cursor: pointer;
+    i {
+        color: black;
+    }
+}
+
 @media screen and (max-width: 667px) {
     .fa-shopping-cart {
         padding: 0 0 !important;
