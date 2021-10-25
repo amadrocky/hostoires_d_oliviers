@@ -8,10 +8,115 @@
     src: url('../../static/fonts/Montserrat-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Gruppo';
+    src: url('../../static/fonts/Gruppo-Regular.ttf');
+}
+
 body {
     height: 100%;
 }
 
 p {
     font-family: 'Montserrat';
+}
+
+.btn-gold {
+    background-color: $gold;
+    border: none;
+    font-size: 20px;
+    border-radius: 30px;
+    padding: 0 40px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    &:hover {
+        background-color: $gold;
+    }
+}
+
+.product-card {
+    display: flex;
+    background-color: #FFF;
+    border-radius: 10px 0 10px 10px;
+    position: relative;
+    .promo-zone {
+        position: absolute;
+        top: -24px;
+        right: 0;
+        background-color: $gold;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        padding: 0 30px;
+    }
+    .product-img {
+        width: 180px;
+        height: 100%;
+        border-radius: 10px 0 0 10px;
+    }
+    .product-text {
+        padding: 10px;
+        font-size: 2vw;
+        .product-title {
+            font-family: 'Noto Serif Display', serif;
+            font-size: 25px;
+            margin-bottom: 0;
+        }
+        .product-description {
+            font-size: 12px;
+            margin-bottom: 0;
+        }
+        .product-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            font-size: 12px;
+            .product-price {
+                font-size: 50px;
+                color: $gold;
+                text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+                p {
+                    margin-bottom: 0;
+                    sup {
+                        font-size: 30px;
+                    }
+                    span {
+                        font-size: 10px;
+                        color: black;
+                        text-decoration: line-through;
+                    }
+                }
+            }
+        }
+    }
+    ul {
+        border: 1px solid $gold;
+        border-radius: 10px;
+        padding: 10px;
+        list-style-type: none;
+        margin-bottom: 10px;
+        li {
+            font-size: 8px;
+        }
+    }
+}
+
+@keyframes apparition {
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media screen and (max-width: 667px) {
+    .product-img {
+        width: 150px !important;
+        height: 100%;
+        border-radius: 10px 0 0 10px;
+    }
+    .product-price p {
+        font-size: 40px;
+    }
+    .btn-gold {
+        font-size: 20px;
+        padding: 0 10px;
+    }
 }

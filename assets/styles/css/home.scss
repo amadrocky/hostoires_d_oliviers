@@ -1,11 +1,37 @@
 .main-head-section {
+    position: relative;
     padding-top: 80px;
     text-align: center;
     height: 100vh;
     background-size: cover;
-    background-image: linear-gradient(rgba(255, 255, 255, .50), rgba(255, 255, 255, .50)), url("../../static/images/olives-g3c4482a85_1920.jpg");
-    .main-title {
-        margin-top: 10%;
+    background-image: linear-gradient(rgba(0, 0, 0, .90), rgba(0, 0, 0, .20)), url("../../static/images/olives-g3c4482a85_1920.jpg");
+    .home-title {
+        margin: 0;
+        position: absolute;
+        padding: 0 5%;
+        top: 40%;
+        h1 {
+            font-family: 'Noto Serif Display', serif;
+            font-size: 6vw;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: apparition 0.4s .2s ease-out forwards;
+        }
+        h2 {
+            font-family: 'Gruppo';
+            font-size: 2vw;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: apparition 0.4s .4s ease-out forwards;
+        }
+    }
+    span {
+        font-family: 'Gruppo';
+        font-size: 30px;
     }
 }
 
@@ -13,7 +39,9 @@
     .btn {
         position: absolute;
         bottom: 30px;
-        right: 40%;
+        right: 0;
+        left: 0;
+        margin: auto;
         font-family: 'Montserrat';
         font-size: 30px;
         line-height: 40px;
@@ -25,11 +53,12 @@
     .btn-three {
         color: #FFF;
         transition: all 0.5s;
+        padding-bottom: 30px;
     }
     .btn-three::before {
         content: '';
         position: absolute;
-        top: 0;
+        top: 10%;
         left: 0;
         width: 100%;
         height: 100%;
@@ -44,7 +73,7 @@
     .btn-three::after {
         content: '';
         position: absolute;
-        top: 0;
+        top: 10%;
         left: 0;
         width: 100%;
         height: 100%;
@@ -60,12 +89,95 @@
     }
 }
 
-.section-2 {
-    background-color: $gold;
+.presentation {
+    background-image: linear-gradient(rgba(255, 255, 255, .80), rgba(255, 255, 255, .10)), url("../../static/images/olive-leaf-g0820824ed_1920.jpg");
+    background-size: cover;
+    padding: 100px 0px;
+    .section-2 {
+        background-color: rgba(white, .9);
+        color: black;
+        font-size: 20px;
+        font-family: 'Montserrat';
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+        padding: 100px 10px;
+        p {
+            opacity: 0;
+            font-family: 'Noto Serif Display', serif;
+            font-size: 30px;
+        }
+        .appear {
+            transform: translateY(30px);
+            animation: apparition 0.8s .5s ease-out forwards;
+        }
+        hr {
+            color: $gold;
+        }
+        .block-presentation {
+            p {
+                padding: 0px 50px;
+            }
+        }
+    }
+}
+
+.home-store {
+    position: relative;
+    .btn-three {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        font-family: 'Montserrat';
+        font-size: 30px;
+        line-height: 40px;
+        height: 50px;
+        text-align: center;
+        width: 250px;
+        cursor: pointer;
+        color: #FFF;
+        transition: all 0.5s;
+        padding-bottom: 30px;
+        span {
+            font-family: 'Noto Serif Display', serif;
+        }
+    }
+    .btn-three::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s;
+    }
+    .btn-three:hover::before {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+    }
+    .btn-three::after {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transform: scale(1.2, 1.2);
+    }
+    .btn-three:hover::after {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
 }
 
 .comment-section {
-    box-shadow: 10px 0 5px $cream;
+    box-shadow: -1px 5px 5px -4px #000 !important;
     h3 {
         font-family: 'Grethania';
         color: $gold;
@@ -77,19 +189,14 @@
 
 .home-wall {
     height: 300px;
-    background-image: linear-gradient(rgba(255, 255, 255, .50), rgba(255, 255, 255, .50)), url('../../static/images/131fd14b072462725fa7eacd515dfc3b.jpg');
+    background-image: url('../../static/images/IMG_3766.jpg');
     background-size: cover;
     background-attachment: fixed;
 }
 
-.section-3 {
-    background-color: $cream;
-    margin-top: -70px;
-}
-
 .section-4 {
-    background-color: $forest;
-    clip-path: ellipse(100% 60% at 50% 40%);
+    background-color: black;
+    padding: 30px 20px;
     .card {
         transition: ease-in;
         width: 18rem;
@@ -101,18 +208,29 @@
     }
     h3 {
         color: $gold;
-    }
-    .btn-gold {
-        background-color: $gold;
-        border: none;
+        font-family: 'Grethania';
+        font-size: 60px;
     }
 }
 
-.section-5 {
-    h3 {
-        color: $gold;
-        font-family: 'Grethania';
-        font-size: 50px;
-        text-shadow: 1px 1px 1px gray;
+.home-delivery {
+    padding: 100px 10px;
+    background: #fff;
+    background-image: linear-gradient(330deg, rgba(255, 255, 255, 1) 50%, rgba(0, 0, 0, 0) 100%), url('../../static/images/garden-g5cfdf5823_1920.jpg');
+    background-size: cover;
+    background-position-Y: -50%;
+    p {
+        font-family: 'Noto Serif Display', serif;
+        font-size: 30px;
+        text-align: end;
+    }
+}
+
+@media screen and (max-width: 667px) {
+    .home-title h1 {
+        font-size: 40px !important;
+    }
+    .home-title h2 {
+        font-size: 20px !important;
     }
 }

@@ -5,80 +5,88 @@
 
 {% block body %}
 	<div class="main-head-section">
-		<h1 class="main-title">Lorem ipsum dolor</h1>
-		<h2>Lorem ipsum doror ghg jeyey jbqjgdhg jqgdhg  hgdg dghgd  ahzgdz dzhqshdqjq dhdgq g</h2>
+		<div class="home-title">
+			<h1 class="main-title">Vente d'oliviers, palmiers et plantes méditerranéennes</h1>
+			<h2>Particuliers - Professionnels</h2>
+		</div>
 		<div class="box-3">
 			<div class="btn btn-three">
-				<span>HOVER ME</span>
+				<span>ENTRER</span>
 			</div>
 		</div>
 	</div>
-	<div class="section-2 row w-100 m-0">
-		<div class="col-6"><img src="http://via.placeholder.com/640x360" alt="placeholder">
-		</div>
-		<div class="col-6 my-auto">
-			<p class="align-items-center">Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+	<div id="presentation" class="presentation row justify-content-center w-100 m-0">
+		<div class="section-2 text-center col col-md-8">
+			<div class="block-presentation my-auto">
+				<hr/>
+				<p id="intro" class="align-items-center">Trouvez sur ce site toutes les informations pour acheter l’olivier qu’il vous faut. Rejoingnez une pépinière en ligne ou une véritable plateforme de jardinerie. Profitez d'un large choix d’arbustes, d’arbres et d’oliviers centenaires avec des délais de réapprovisionnent très court, et bien sûr, une qualité irréprochable.</p>
+			</div>
 		</div>
 	</div>
+	<div class="section-4">
+		<div class="row w-100 m-0 justify-content-center home-store">
+			<div class="col-12 text-center py-4">
+				<h3>Découvrez nos produits</h3>
+			</div>
+			{% for i in 0..2 %}
+				<div class="col my-3">
+					<div class="product-card">
+						<span class="promo-zone">Promotion</span>
+						<div class="product-img-zone">
+							<img src="{{ asset('build/images/olivier-d-europe-609764-2.jpg') }}" class="product-img" alt="photo">
+						</div>
+						<div class="product-text">
+							<p class="product-title">Olivier</p>
+							<p class="product-description">Some quick example text to build on the card title</p>
+							<div class="product-details">
+								<div class="product-price">
+									<p>150<sup>€</sup>
+										<span>179 €</span>
+									</p>
+								</div>
+							</div>
+							<ul>
+								<li>Lorem Ipsum dolor</li>
+								<li>Lorem Ipsum dolor</li>
+								<li>Lorem Ipsum dolor</li>
+							</ul>
+							<div class="text-center">
+								<a href="#" class="btn btn-primary btn-gold">Acheter</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="box-4 my-4 text-center">
+				<div class="btn btn-three">
+					<span>Boutique</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="home-wall d-none d-sm-block"></div>
 	<div class="py-5 comment-section text-center">
 		<h3>
 			<i class="fas fa-quote-left"></i>
 			Lorem Ipsum dolor sit amet, consectetur adipiscing elit</h3>
 	</div>
-	<div class="home-wall"></div>
-	<div class="section-4 p-5 w-100">
-		<div class="row justify-content-center">
-			<div class="col-12 text-center py-4">
-				<h3>Lorem Ipsum dolor sit amet</h3>
-			</div>
-			<div class="col d-flex justify-content-center">
-				<div class="card">
-					<img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-primary btn-gold w-100">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-			<div class="col d-flex justify-content-center">
-				<div class="card">
-					<img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-primary btn-gold w-100">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-			<div class="col d-flex justify-content-center">
-				<div class="card">
-					<img class="card-img-top" src="http://via.placeholder.com/150x150" alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="btn btn-primary btn-gold w-100">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-			<div class="my-4 text-center">
-				<btn class="btn btn-outline-secondary btn-lg">Lorem ipsum dolor</btn>
-			</div>
+	<div class="home-delivery row w-100 m-0">
+		<div class="col col-md-6"></div>
+		<div class="col-md-6 home-delivery-text my-auto">
+			<p class="m-0">Profitez de la livraison et plantation de votre arbre dans un rayon de 30 kilomètres d'Orléans.</p>
 		</div>
 	</div>
-	<div class="row section-3 w-100 mx-0">
-		<div class="col my-auto text-center">
-			<h3>Lorem Ipsum dolor sit amet</h3>
-			<p>Lorem Ipsum dolor sit amet, consectetur adipiscing elit</p>
-		</div>
-		<div class="col">
-			<div class="col"><img src="http://via.placeholder.com/640x360" alt="placeholder">
-			</div>
-		</div>
-	</div>
-	<div class="section-5 text-center p-5">
-		<h3>Lorem Ipsum</h3>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
-		</p>
-	</div>
+
+	<script type="text/javascript">
+var body=document.getElementsByTagName("body")[0];
+var parent=document.getElementById("presentation");
+var child=document.getElementById("intro");
+body.onscroll = function(){
+if(document.documentElement.scrollTop>=(parent.offsetTop - 600))
+{
+   child.classList.add('appear');
+}
+
+};
+	</script>
 {% endblock %}

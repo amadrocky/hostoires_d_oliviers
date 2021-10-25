@@ -1,16 +1,19 @@
 footer {
-    color: $cream;
+    color: black;
+    background-color: $gold;
     font-family: 'Montserrat';
     .footer-title {
         font-size: 50px;
-        color: $gold;
+        color: black;
+        //text-shadow: 1px 1px 1px grey;
         font-family: 'Grethania';
     }
     hr {
-        color: $gold;
+        color: white;
     }
     ul {
         list-style-type: none;
+        padding-left: 0;
     }
     li {
         line-height: 30px;
@@ -21,7 +24,10 @@ footer {
         border-radius: 10%;
     }
     i {
-        font-size: 25px !important;
-        color: $gold;
+        font-size: 25px;
+        color: black;
+    }
+    .stripe-icon {
+        font-size: 50px !important;
     }
 }
