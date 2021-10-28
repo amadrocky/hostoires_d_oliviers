@@ -6,18 +6,21 @@
 {% block body %}
 	<div class="main-head-section">
 		<div class="home-title">
-			<h1 class="main-title">Vente d'oliviers, palmiers et plantes méditerranéennes</h1>
-			<h2>Particuliers - Professionnels</h2>
-		</div>
-		<div class="box-3">
-			<div class="btn btn-three">
-				<span>ENTRER</span>
+			<div class="black-back">
+				<h1 class="main-title">Vente d'oliviers, palmiers et plantes méditerranéennes</h1>
+				<h2>Particuliers - Professionnels</h2>
+				<div class="box-3">
+					<div class="btn btn-three" onclick="enter()">
+						<span>ENTRER</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div id="presentation" class="presentation row justify-content-center w-100 m-0">
 		<div class="section-2 text-center col col-md-8">
 			<div class="block-presentation my-auto">
+			<img src="{{ asset('build/images/unnamed.png') }}" class="presentation-img" alt="image plante">
 				<hr/>
 				<p id="intro" class="align-items-center">Trouvez sur ce site toutes les informations pour acheter l’olivier qu’il vous faut. Rejoingnez une pépinière en ligne ou une véritable plateforme de jardinerie. Profitez d'un large choix d’arbustes, d’arbres et d’oliviers centenaires avec des délais de réapprovisionnent très court, et bien sûr, une qualité irréprochable.</p>
 			</div>
@@ -34,7 +37,7 @@
 				</div>
 			{% endfor %}
 			<div class="box-4 my-4 text-center">
-				<div class="btn btn-three">
+				<div class="btn btn-three" onclick="goToShop()">
 					<span>Boutique</span>
 				</div>
 			</div>
@@ -54,6 +57,10 @@
 	</div>
 
 	<script type="text/javascript">
+function enter() {
+	document.getElementById('presentation').scrollIntoView({behavior: 'smooth'});
+}
+
 		var body = document.getElementsByTagName("body")[0];
 var parent = document.getElementById("presentation");
 var child = document.getElementById("intro");
@@ -61,7 +68,10 @@ body.onscroll = function () {
 if (document.documentElement.scrollTop >= (parent.offsetTop - 600)) {
 child.classList.add('appear');
 }
-
 };
+
+function goToShop(){
+	window.location.href="/boutique";
+}
 	</script>
 {% endblock %}

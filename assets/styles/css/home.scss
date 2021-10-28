@@ -4,15 +4,17 @@
     text-align: center;
     height: 100vh;
     background-size: cover;
-    background-image: linear-gradient(rgba(0, 0, 0, .90), rgba(0, 0, 0, .20)), url("../../static/images/olives-g3c4482a85_1920.jpg");
+    background-image: url("../../static/images/IMG_3856.jpg");
+    background-position-Y: 20%;
     .home-title {
         margin: 0;
         position: absolute;
         padding: 0 5%;
-        top: 40%;
+        top: 30%;
+        max-width: 50%;
         h1 {
-            font-family: 'Noto Serif Display', serif;
-            font-size: 6vw;
+            font-family: 'Grethania';
+            font-size: 5vw;
             color: white;
             text-shadow: 1px 1px 1px black;
             opacity: 0;
@@ -35,13 +37,15 @@
     }
 }
 
+.black-back {
+    position: relative;
+    background-color: rgba(#000, .5);
+    padding: 40px 60px;
+    border-radius: 30px;
+}
+
 .box-3 {
     .btn {
-        position: absolute;
-        bottom: 30px;
-        right: 0;
-        left: 0;
-        margin: auto;
         font-family: 'Montserrat';
         font-size: 30px;
         line-height: 40px;
@@ -51,6 +55,7 @@
         cursor: pointer;
     }
     .btn-three {
+        position: relative;
         color: #FFF;
         transition: all 0.5s;
         padding-bottom: 30px;
@@ -90,9 +95,16 @@
 }
 
 .presentation {
-    background-image: linear-gradient(rgba(255, 255, 255, .80), rgba(255, 255, 255, .10)), url("../../static/images/olive-leaf-g0820824ed_1920.jpg");
+    //background-image: linear-gradient(rgba(255, 255, 255, .80), rgba(255, 255, 255, .10)), url("../../static/images/olive-leaf-g0820824ed_1920.jpg");
     background-size: cover;
+    background-color: white;
     padding: 100px 0px;
+    position: relative;
+    .presentation-img {
+        position: absolute;
+        top: 15%;
+        right: 70%;
+    }
     .section-2 {
         background-color: rgba(white, .9);
         color: black;
@@ -227,10 +239,20 @@
 }
 
 @media screen and (max-width: 667px) {
+    .black-back {
+        padding: 40px 10px;
+    }
+    .home-title {
+        top: 40% !important;
+        max-width: 100% !important;
+    }
     .home-title h1 {
         font-size: 40px !important;
     }
     .home-title h2 {
         font-size: 20px !important;
+    }
+    .presentation-img {
+        display: none !important;
     }
 }

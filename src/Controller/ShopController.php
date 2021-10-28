@@ -13,7 +13,7 @@ class ShopController extends AbstractController
 {
 
     /**
-     * @Route("/boutique", name="index")
+     * @Route("/", name="index")
      *
      * @return Response
      */
