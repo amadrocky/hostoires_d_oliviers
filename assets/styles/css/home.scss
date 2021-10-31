@@ -95,7 +95,6 @@
 }
 
 .presentation {
-    //background-image: linear-gradient(rgba(255, 255, 255, .80), rgba(255, 255, 255, .10)), url("../../static/images/olive-leaf-g0820824ed_1920.jpg");
     background-size: cover;
     background-color: white;
     padding: 100px 0px;
@@ -119,7 +118,7 @@
         }
         .appear {
             transform: translateY(30px);
-            animation: apparition 0.8s .5s ease-out forwards;
+            animation: apparition .8s .3s ease-out forwards;
         }
         hr {
             color: $gold;
