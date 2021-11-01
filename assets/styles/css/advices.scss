@@ -1,0 +1,21 @@
+.advices {
+    h2 {
+        font-family: 'Noto Serif Display', serif;
+        font-size: 50px;
+    }
+    h3 {
+        font-family: 'Noto Serif Display', serif;
+        border-left: 10px double $gold;
+        padding-left: 20px;
+    }
+    .advices-presentation {
+        padding: 20px;
+        border-left: 1px solid $gold;
+        border-right: 1px solid $gold;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .advices-block {
+        margin: 40px 0;
+    }
+}

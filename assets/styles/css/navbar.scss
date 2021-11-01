@@ -63,6 +63,11 @@
     }
 }
 
+#navbarNavDropdown .dropdown-item {
+    color: black;
+    text-shadow: none;
+}
+
 @media screen and (max-width: 667px) {
     .fa-shopping-cart {
         padding: 0 0 !important;
