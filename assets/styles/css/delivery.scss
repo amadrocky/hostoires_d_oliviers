@@ -1,0 +1,16 @@
+.delivery-block {
+    padding: 30px;
+    border-left: 1px solid $gold;
+    border-right: 1px solid $gold;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    h2 {
+        font-family: 'Noto Serif Display', serif;
+        font-size: 50px;
+    }
+    img {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+}

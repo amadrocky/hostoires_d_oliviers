@@ -15,6 +15,13 @@
         border-top-left-radius: 20px;
         border-bottom-right-radius: 20px;
     }
+    .advices-presentation-img {
+        height: 200px;
+        background-image: url("../../static/images/garden-g5cfdf5823_1920.jpg");
+        background-size: cover;
+        border-radius: 5px;
+        background-position-y: 80%;
+    }
     .advices-block {
         margin: 40px 0;
     }
