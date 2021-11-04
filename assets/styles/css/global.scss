@@ -13,6 +13,19 @@
     src: url('../../static/fonts/Gruppo-Regular.ttf');
 }
 
+html::-webkit-scrollbar {
+    width: 5px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: $gold;
+    border-radius: 10px !important;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: black;
+}
+
 body {
     height: 100%;
 }
@@ -26,6 +39,21 @@ body {
     padding: 30px;
     margin: 30px 50px;
     box-shadow: -1px 5px 5px -4px #000;
+}
+
+.block-title-head {
+    padding: 50px 10px;
+    background: #fff;
+    background-size: cover;
+    background-position-Y: -50%;
+    border-radius: 5px;
+    h1 {
+        font-family: 'Grethania';
+        font-size: 100px;
+        opacity: 0;
+        transform: translateX(-30px);
+        animation: apparition 0.4s .3s ease-out forwards;
+    }
 }
 
 p {

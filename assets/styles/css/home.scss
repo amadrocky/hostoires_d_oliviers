@@ -10,11 +10,11 @@
         margin: 0;
         position: absolute;
         padding: 0 5%;
-        top: 30%;
+        top: 20%;
         max-width: 50%;
         h1 {
             font-family: 'Grethania';
-            font-size: 5vw;
+            font-size: 65px;
             color: white;
             text-shadow: 1px 1px 1px black;
             opacity: 0;
@@ -40,8 +40,13 @@
 .black-back {
     position: relative;
     background-color: rgba(#000, .5);
-    padding: 40px 60px;
-    border-radius: 30px;
+    border-radius: 100%;
+    width: 500px;
+    height: 500px;
+    .main-title {
+        position: absolute;
+        top: 30%;
+    }
 }
 
 .box-3 {
@@ -239,14 +244,16 @@
 
 @media screen and (max-width: 667px) {
     .black-back {
-        padding: 40px 10px;
-    }
-    .home-title {
-        top: 40% !important;
-        max-width: 100% !important;
-    }
-    .home-title h1 {
-        font-size: 40px !important;
+        width: 350px;
+        height: 350px;
+        margin-top: 50%;
+        .main-title {
+            position: absolute;
+            top: 30%;
+            h1 {
+                font-size: 40px;
+            }
+        }
     }
     .home-title h2 {
         font-size: 20px !important;
