@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Produit
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="white-block">
+			<div class="d-flex">
+				<div class="product-images-zone">
+					<img src="{{ asset('build/images/olivier-d-europe-609764-2.jpg') }}" alt="photo">
+				</div>
+				<div class="product-description-zone flex-fill">
+					<h3 class="product-description-title">Olivier décoratif</h3>
+					<p>Lorem ipsum dolor</p>
+					<p>Lorem ipsum dolor</p>
+					<p>Lorem ipsum dolor</p>
+					<div>
+						<button class="btn btn-gold btn-xl text-white text-uppercase">Ajouter au panier</button>
+					</div>
+				</div>
+			</div>
+			<div class="product-details-zone">
+				<h4>Caractéristiques produit</h4>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</p>
+			</div>
+			<div class="product-suggestions-zone"></div>
+		</div>
+	</div>
+{% endblock %}
