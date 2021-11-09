@@ -1,64 +1,132 @@
-.shop-tape {
-    background-image: linear-gradient(330deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%), url('../../static/images/IMG_3745.jpg');
-}
-
-.filters {
-    .filter {
-        border: 1px solid $gold;
-        border-radius: 5px;
-        transition: all .2s ease-in;
-        height: 100%;
-        &:hover {
-            cursor: pointer;
-            background-color: $gold;
-            color: white;
-            box-shadow: 0px 5px 4px -1px rgb(0 0 0 / 25%);
+    .shop-tape {
+        background-image: linear-gradient(330deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%), url('../../static/images/IMG_3745.jpg');
+    }
+    
+    .filters {
+        .filter {
+            border: 1px solid $gold;
+            border-radius: 5px;
+            transition: all .2s ease-in;
+            height: 100%;
+            &:hover {
+                cursor: pointer;
+                background-color: $gold;
+                color: white;
+                box-shadow: 0px 5px 4px -1px rgb(0 0 0 / 25%);
+                p {
+                    text-shadow: 02px 2px 0px rgb(0 0 0 / 25%);
+                }
+            }
             p {
-                text-shadow: 02px 2px 0px rgb(0 0 0 / 25%);
+                font-family: 'Noto Serif Display', serif;
+                font-size: 2vw;
+                display: inline-block;
+                vertical-align: middle;
             }
         }
-        p {
-            font-family: 'Noto Serif Display', serif;
-            font-size: 2vw;
-            display: inline-block;
-            vertical-align: middle;
+    }
+    
+    .product-images-zone {
+        img {
+            max-width: 300px;
+            height: auto;
+            box-shadow: -1px 5px 5px -4px #000;
         }
     }
-}
-
-.product-images-zone {
-    img {
-        max-width: 300px;
-        height: auto;
+    
+    .product-description-zone {
+        padding: 30px;
+        background-color: white;
         box-shadow: -1px 5px 5px -4px #000;
+        .product-description-title {
+            font-family: 'Noto Serif Display', serif;
+            font-size: 50px;
+        }
+        .product-description-attributes {
+            padding: 30px;
+            border: 1px solid $gold;
+            p {
+                margin: 0;
+            }
+        }
+        .product-description-price {
+            text-align: center;
+            padding: 0 30px;
+            p {
+                font-size: 80px;
+                color: $gold;
+                text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+                span {
+                    font-size: 20px;
+                    text-decoration: line-through;
+                    color: black;
+                }
+            }
+        }
     }
-}
-
-.product-description-zone {
-    padding: 30px;
-    background-color: white;
-    box-shadow: -1px 5px 5px -4px #000;
-    .product-description-title {
-        font-family: 'Noto Serif Display', serif;
-        font-size: 50px;
+    
+    .product-details-zone {
+        margin: 30px 0;
+        padding: 30px;
+        background-color: white;
+        box-shadow: -1px 5px 5px -4px #000;
+        h4 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Noto Serif Display', serif;
+            font-size: 30px;
+        }
     }
-}
-
-.product-details-zone {
-    margin: 30px 0;
-    padding: 30px;
-    background-color: white;
-    box-shadow: -1px 5px 5px -4px #000;
-    h4 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: 'Noto Serif Display', serif;
-        font-size: 30px;
+    
+    .product-suggest-zone {
+        background-color: #212529;
+        padding: 30px 0;
+        h3 {
+            font-family: 'Noto Serif Display', serif;
+            font-size: 50px;
+            color: $gold;
+            margin-bottom: 30px;
+        }
+        .suggest-card {
+            width: 200px;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+            transition: all .2s ease-in;
+            transform: scale(1);
+            cursor: pointer;
+            margin: 0 auto;
+            &:hover {
+                transform: scale(1.06);
+            }
+            img {
+                max-height: 200px;
+                width: auto;
+                display: block;
+                margin: auto;
+            }
+            .suggest-card-description {
+                text-align: center;
+                font-family: 'Noto Serif Display', serif;
+                font-size: 20px;
+                margin: 0;
+            }
+            .suggest-card-price {
+                margin: 0;
+                font-size: 50px;
+                color: $gold;
+                text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+                span {
+                    font-size: 10px;
+                    text-decoration: line-through;
+                    color: black;
+                }
+            }
+        }
     }
-}
-
-@media screen and (max-width: 667px) {
-    .block-title-head h1 {
-        font-size: 70px;
+    
+    @media screen and (max-width: 667px) {
+        .block-title-head h1 {
+            font-size: 70px;
+        }
     }
-}
