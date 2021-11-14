@@ -1,25 +1,30 @@
 <div class="product-card">
-	<span class="promo-zone">Promotion</span>
+	{% if product.originPrice %}
+		<span class="promo-zone">Promotion</span>
+	{% endif %}
 	<div class="product-img-zone">
 		<img src="{{ asset('build/images/olivier-d-europe-609764-2.jpg') }}" class="product-img" alt="photo">
 	</div>
 	<div class="product-text">
-		<p class="product-title">Olivier</p>
-		<p class="product-description">Some quick example text to build on the card title</p>
+		<p class="product-title">{{ product.name }}</p>
+		<p class="product-description">{{ product.mainDescription }}</p>
 		<div class="product-details">
 			<div class="product-price">
-				<p>150<sup>€</sup>
-					<span>179 €</span>
+				<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
+					{% if product.originPrice %}
+						<span>{{ product.originPrice / 100 }}
+							€{{ product.originPrice|slice(-2) }}</span>
+					{% endif %}
 				</p>
 			</div>
 		</div>
 		<ul>
-			<li>Lorem Ipsum dolor</li>
-			<li>Lorem Ipsum dolor</li>
-			<li>Lorem Ipsum dolor</li>
+			<li>{{ product.mainAttribute1 }}</li>
+			<li>{{ product.mainAttribute2 }}</li>
+			<li>{{ product.mainAttribute3 }}</li>
 		</ul>
 		<div class="text-center">
-			<a href="{{ path('products_show') }}" class="btn btn-primary btn-gold">Acheter</a>
+			<a href="{{ path('products_show', {'id': product.id}) }}" class="btn btn-primary btn-gold">Acheter</a>
 		</div>
 	</div>
 </div>

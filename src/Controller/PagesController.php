@@ -23,12 +23,4 @@ class PagesController extends AbstractController
     {
         return $this->render('pages/delivery.html.twig');
     }
-
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contactPage(): Response
-    {
-        return $this->render('pages/contact.html.twig');
-    }
 }

@@ -120,9 +120,13 @@ p {
                 color: $gold;
                 text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
                 p {
+                    position: relative;
                     margin-bottom: 0;
                     sup {
-                        font-size: 30px;
+                        position: absolute;
+                        top: 25px;
+                        bottom: auto;
+                        font-size: 15px;
                     }
                     span {
                         font-size: 10px;

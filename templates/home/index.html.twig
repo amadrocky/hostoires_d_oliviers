@@ -33,7 +33,7 @@
 			<div class="col-12 text-center py-4">
 				<h3>Découvrez nos produits</h3>
 			</div>
-			{% for i in 0..2 %}
+			{% for product in lastProducts %}
 				<div class="col col-md-4 my-3">
 					{% include('products/_partials/product.html.twig') %}
 				</div>

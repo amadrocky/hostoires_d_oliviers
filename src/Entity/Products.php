@@ -40,12 +40,12 @@ class Products
     private $mainDescription;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="integer")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $originPrice;
 
@@ -109,6 +109,11 @@ class Products
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -162,24 +167,24 @@ class Products
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(int $price): self
     {
         $this->price = $price;
 
         return $this;
     }
 
-    public function getOriginPrice(): ?float
+    public function getOriginPrice(): ?int
     {
         return $this->originPrice;
     }
 
-    public function setOriginPrice(?float $originPrice): self
+    public function setOriginPrice(?int $originPrice): self
     {
         $this->originPrice = $originPrice;
 
@@ -326,6 +331,18 @@ class Products
     public function setOrders(?Orders $orders): self
     {
         $this->orders = $orders;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

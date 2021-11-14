@@ -35,7 +35,7 @@
     }
     
     .product-description-zone {
-        padding: 30px;
+        padding: 10px 30px;
         background-color: white;
         box-shadow: -1px 5px 5px -4px #000;
         .product-description-title {
@@ -53,9 +53,16 @@
             text-align: center;
             padding: 0 30px;
             p {
+                position: relative;
                 font-size: 80px;
                 color: $gold;
                 text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+                sup {
+                    position: absolute;
+                    top: 30px;
+                    bottom: auto;
+                    font-size: 25px;
+                }
                 span {
                     font-size: 20px;
                     text-decoration: line-through;

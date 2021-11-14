@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nous contacter
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="block-title-head contact-tape">
+			<h1>Nous contacter</h1>
+		</div>
+		<div class="white-block">
+			<div class="row">
+				<div class="col-12 col-md-6 p-3">
+					<div class="contact-brand">
+						<p>Toute notre équipe se tient à votre disposition pour vos besoins et demandes.</p>
+						<h3>Histoires d'Oliviers</h3>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 p-3">
+					{{ form_start(form) }}
+					{{ form_errors(form) }}
+					{{ form_row(form.name, {'attr': {'class': 'mb-2'}}) }}
+					{{ form_row(form.email, {'attr': {'class': 'mb-2'}}) }}
+					{{ form_row(form.object, {'attr': {'class': 'mb-2'}}) }}
+					{{ form_row(form.message, {'attr': {'class': 'mb-2'}}) }}
+					<button type="submit" class="btn btn-secondary btn-lg">Envoyer</button>
+					{{ form_end(form) }}
+				</form>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
