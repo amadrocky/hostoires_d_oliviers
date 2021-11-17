@@ -30,7 +30,8 @@
 					</div>
 					<form action="{{ path('cart_add') }}" class="mt-4" method="post">
 						<label for="quantity">Quantité</label>
-						<input type="number" id="quantity" name="productId" value="1" min="1" max="{{ product.quantity }}" style="width: 40px;">
+						<input type="number" id="quantity" name="productQuantity" value="1" min="1" max="{{ product.quantity }}" style="width: 40px;">
+						<input type="hidden" name="productId" value="{{ product.id }}">
 						<input type="submit" class="btn btn-secondary btn-lg text-white text-uppercase" value="Ajouter au panier">
 					</form>
 					<div class="product-indication mt-3">

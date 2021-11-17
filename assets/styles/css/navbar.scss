@@ -63,6 +63,17 @@
     }
 }
 
+.cart-icon {
+    position: relative;
+    .fa-circle {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: red;
+        font-size: 10px;
+    }
+}
+
 #navbarNavDropdown .dropdown-item {
     color: black;
     text-shadow: none;
