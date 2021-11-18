@@ -6,59 +6,72 @@
 {% block body %}
 	<div class="container">
 		<div class="white-block">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="col-12 alert alert-info alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			{% endfor %}
 			<div class="p-3">
 				<h2 class="loginTitle mb-3 text-center">Panier</h2>
 				{% if products is not null %}
-					<table class="table table-hover table-responsive cart-table">
-						<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col">Article</th>
-								<th scope="col">Description</th>
-								<th scope="col">Qté</th>
-								<th scope="col">Prix</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							{% set total = 0 %}
-							{% for product in products %}
-								{% set price = product[0].price * product[1] %}
-								{% set total = total + price %}
+					<div class="table-responsive">
+						<table class="table table-hover cart-table">
+							<thead>
 								<tr>
-									<td>#</td>
-									<td>{{ product[0].name }}</td>
-									<td>{{ product[0].mainDescription }}</td>
-									<td>{{ product[1] }}</td>
-									<td>{{ price / 100 }},{{ price|slice(-2) }}
-										€</td>
-									<td>
-										<a href="" class="btn btn-danger">
-											<i class="fas fa-trash-alt"></i>
-										</a>
-									</td>
+									<th scope="col"></th>
+									<th scope="col">Article</th>
+									<th scope="col">Description</th>
+									<th scope="col">Qté</th>
+									<th scope="col">Prix</th>
+									<th scope="col"></th>
 								</tr>
-							{% endfor %}
-						</tbody>
-						<tfoot>
-							<tr>
-								<th colspan="3"></th>
-								<th>TOTAL</th>
-								<th>{{ total / 100 }},{{ total|slice(-2) }} €</th>
-								<th></th>
-							</tr>
-						</tfoot>
-					</table>
+							</thead>
+							<tbody>
+								{% set total = 0 %}
+								{% for product in products %}
+									{% set price = product[0].price * product[1] %}
+									{% set total = total + price %}
+									<tr>
+										<td>#</td>
+										<td>{{ product[0].name }}</td>
+										<td>{{ product[0].mainDescription }}</td>
+										<td>{{ product[1] }}</td>
+										<td>{{ price / 100 }},{{ price|slice(-2) }}
+											€</td>
+										<td>
+											<a href="{{ path('cart_remove', {'id': product[0].id}) }}" class="btn btn-danger">
+												<i class="fas fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="3"></th>
+									<th>TOTAL</th>
+									<th>{{ total / 100 }},{{ total|slice(-2) }}
+										€</th>
+									<th></th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
 				{% else %}
 					<div class="alert alert-info" role="alert">
 						Votre panier est vide.
 						<a href="{{ path('products_index') }}">Accédez à la boutique</a>
 					</div>
 				{% endif %}
-				<div class="d-flex flex-row-reverse cart-buttons">
-					<a href="" class="btn btn-success btn-lg mx-2">Passer commande</a>
-					<a href="{{ path('products_index') }}" class="btn btn-outline-dark mx-2">Continuer mes achats</a>
-				</div>
+				{% if products|length > 0 %}
+					<div class="d-flex flex-row-reverse cart-buttons">
+						<a href="" class="btn btn-success btn-lg mx-2">Passer commande</a>
+						<a href="{{ path('products_index') }}" class="btn btn-outline-dark mx-2">Continuer mes achats</a>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

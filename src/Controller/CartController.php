@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductsRepository;
 
@@ -30,8 +31,9 @@ class CartController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        //$request->getSession()->clear();
         return $this->render('cart/index.html.twig', [
-            'products' => $this->getcartProducts($request->getSession()->get('cartProductsIds')) ?? null
+            'products' => $this->getCartProducts($request->getSession()->get('cartProductsIds')) ?? null
         ]);
     }
 
@@ -41,10 +43,9 @@ class CartController extends AbstractController
      * @Route("/add", name="add", methods={"POST"})
      *
      * @param Request $request
-     * @param integer $id
-     * @return void
+     * @return RedirectResponse
      */
-    public function addToCart(Request $request)
+    public function addToCart(Request $request): RedirectResponse
     {
         $cartProductsIds = [];
         $id = $_POST['productId'];
@@ -64,12 +65,40 @@ class CartController extends AbstractController
     }
 
     /**
+     * @Route("/remove/{id}", name="remove", methods={"GET"})
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function removeToCart(Request $request, int $id): RedirectResponse
+    {
+        $cartProductsIds = $this->getCartProducts($request->getSession()->get('cartProductsIds'));
+
+        if ($cartProductsIds != null && count($cartProductsIds) > 0) {
+            $i = 0;
+            foreach ($cartProductsIds as $value) {
+                if ($value[0]->getId() == $id) {
+                    unset($cartProductsIds[$i]);
+                    $i++;
+                }
+            }
+
+            $request->getSession()->set('cartProductsIds', $cartProductsIds);
+        }
+
+        $this->addFlash('succes', 'Produit retiré du panier');
+
+        return $this->redirectToRoute('cart_index');
+    }
+
+    /**
      * Get products objects
      *
      * @param [array|null] $sessionProducts
      * @return void
      */
-    private function getcartProducts($sessionProducts)
+    private function getCartProducts($sessionProducts)
     {
         $datas = null;
 
@@ -78,7 +107,7 @@ class CartController extends AbstractController
             $i = 0;
 
             foreach ($sessionProducts as $key => $value) {
-                $datas['product'.$i] = [
+                $datas[] = [
                         $this->productsRepository->find($key),
                         intval($value)
                     ];
