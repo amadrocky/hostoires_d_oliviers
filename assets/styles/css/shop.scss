@@ -136,4 +136,42 @@
         .block-title-head h1 {
             font-size: 70px;
         }
+        .product-description-zone {
+            padding: 10px !important;
+        }
+        .product-images-zone {
+            img {
+                max-width: 150px;
+                height: auto;
+                box-shadow: -1px 5px 5px -4px #000;
+            }
+        }
+        .product-description-title {
+            font-size: 20px !important;
+        }
+        .product-description-subtitle {
+            font-size: 12px !important;
+        }
+        .product-description-attributes {
+            padding: 5px !important;
+            font-size: 12px !important;
+        }
+        .product-description-price {
+            padding: 5px !important;
+            position: relative;
+            p {
+                font-size: 50px !important;
+                position: absolute !important;
+                top: 20%;
+                right: 10;
+            }
+            span {
+                font-size: 10px !important;
+            }
+        }
+        .product-suggest-zone {
+            h3 {
+                font-size: 25px !important;
+            }
+        }
     }
