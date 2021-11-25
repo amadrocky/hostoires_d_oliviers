@@ -117,6 +117,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $billingCity;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $complement;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $billingComplement;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -417,6 +427,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBillingCity(?string $billingCity): self
     {
         $this->billingCity = $billingCity;
+
+        return $this;
+    }
+
+    public function getComplement(): ?string
+    {
+        return $this->complement;
+    }
+
+    public function setComplement(?string $complement): self
+    {
+        $this->complement = $complement;
+
+        return $this;
+    }
+
+    public function getBillingComplement(): ?string
+    {
+        return $this->billingComplement;
+    }
+
+    public function setBillingComplement(?string $billingComplement): self
+    {
+        $this->billingComplement = $billingComplement;
 
         return $this;
     }
