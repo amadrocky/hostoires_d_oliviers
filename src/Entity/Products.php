@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -90,12 +92,12 @@ class Products
     private $descriptionShow3;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $modifiedAt;
 
@@ -105,14 +107,19 @@ class Products
     private $workflowState;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="products")
-     */
-    private $orders;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $quantity;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Orders::class, inversedBy="products")
+     */
+    private $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -287,24 +294,24 @@ class Products
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?\DateTimeInterface
     {
         return $this->modifiedAt;
     }
 
-    public function setModifiedAt(?\DateTimeImmutable $modifiedAt): self
+    public function setModifiedAt(?\DateTimeInterface $modifiedAt): self
     {
         $this->modifiedAt = $modifiedAt;
 
@@ -323,18 +330,6 @@ class Products
         return $this;
     }
 
-    public function getOrders(): ?Orders
-    {
-        return $this->orders;
-    }
-
-    public function setOrders(?Orders $orders): self
-    {
-        $this->orders = $orders;
-
-        return $this;
-    }
-
     public function getQuantity(): ?int
     {
         return $this->quantity;
@@ -343,6 +338,30 @@ class Products
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Orders[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        $this->orders->removeElement($order);
 
         return $this;
     }

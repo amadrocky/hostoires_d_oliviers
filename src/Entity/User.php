@@ -55,21 +55,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $zipCode;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $gender;
 
     /**
@@ -101,31 +86,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="user")
      */
     private $orders;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $billingAddress;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $billingZipcode;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $billingCity;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $complement;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $billingComplement;
 
     public function __construct()
     {
@@ -257,42 +217,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?int
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(?int $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getGender(): ?string
     {
         return $this->gender;
@@ -361,96 +285,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setWorkflowState(?string $workflowState): self
     {
         $this->workflowState = $workflowState;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Orders[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getUser() === $this) {
-                $order->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getBillingAddress(): ?string
-    {
-        return $this->billingAddress;
-    }
-
-    public function setBillingAddress(?string $billingAddress): self
-    {
-        $this->billingAddress = $billingAddress;
-
-        return $this;
-    }
-
-    public function getBillingZipcode(): ?int
-    {
-        return $this->billingZipcode;
-    }
-
-    public function setBillingZipcode(?int $billingZipcode): self
-    {
-        $this->billingZipcode = $billingZipcode;
-
-        return $this;
-    }
-
-    public function getBillingCity(): ?string
-    {
-        return $this->billingCity;
-    }
-
-    public function setBillingCity(?string $billingCity): self
-    {
-        $this->billingCity = $billingCity;
-
-        return $this;
-    }
-
-    public function getComplement(): ?string
-    {
-        return $this->complement;
-    }
-
-    public function setComplement(?string $complement): self
-    {
-        $this->complement = $complement;
-
-        return $this;
-    }
-
-    public function getBillingComplement(): ?string
-    {
-        return $this->billingComplement;
-    }
-
-    public function setBillingComplement(?string $billingComplement): self
-    {
-        $this->billingComplement = $billingComplement;
 
         return $this;
     }
