@@ -87,6 +87,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $complement;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $zipCode;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -285,6 +305,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setWorkflowState(?string $workflowState): self
     {
         $this->workflowState = $workflowState;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(?string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getComplement(): ?string
+    {
+        return $this->complement;
+    }
+
+    public function setComplement(?string $complement): self
+    {
+        $this->complement = $complement;
+
+        return $this;
+    }
+
+    public function getZipCode(): ?int
+    {
+        return $this->zipCode;
+    }
+
+    public function setZipCode(?int $zipCode): self
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

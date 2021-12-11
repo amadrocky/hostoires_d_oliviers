@@ -7,12 +7,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ProductsRepository;
 
 /**
  * @Route("/commande", name="orders_")
  */
 class OrdersController extends AbstractController
 {
+    /**
+     * @var OrdersRepository
+     */
+    private $productsRepository;
+
+    private const DELIVERY = 8000;
+    private const PLANTING = 13000;
+
+    public function __construct(ProductsRepository $productsRepository) 
+    {
+        $this->productsRepository = $productsRepository;
+    }
+
     /**
      * @Route("/creation", name="new", methods={"POST"})
      */
@@ -24,8 +38,19 @@ class OrdersController extends AbstractController
         
         $order->setNumber(uniqid());
 
-        // ajouter le calcul du montant
-        $order->setAmount();
+        $products = $_POST['products'];
+        $orderItems = [];
+        $orderAmount = $_POST['amount'];
+
+        foreach($products as $product) {
+            $orderItems[] = $this->productsRepository->find(intval($product));
+        }
+
+        foreach($orderItems as $orderItem) {
+            $order->addProduct($orderItem);
+        }
+        
+        $order->setAmount(intval($orderAmount));
         
         $order->setCreatedAt($date);
         $order->setModifiedAt($date);
@@ -38,7 +63,7 @@ class OrdersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET", "POST"})
      *
      * @param Request $request
      * @param Orders $order
