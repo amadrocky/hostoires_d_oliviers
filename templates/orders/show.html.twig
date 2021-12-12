@@ -14,7 +14,7 @@
 			</div>
 			<div class="p-3">
 				<h2 class="loginTitle mb-3 text-center">Commande</h2>
-				<form action="{{ path('orders_show', {'id': order.id}) }}" method="post">
+				<form action="{{ path('orders_show', {'number': order.number}) }}" method="post">
 					<div class="table-responsive">
 						<table class="table table-hover cart-table">
 							<thead>
@@ -35,27 +35,33 @@
 								{% endfor %}
 							</tbody>
 							<tfoot>
+							<tr>
+								<th></th>
+								<th>TVA</th>
+								<th>{{ taxAmount / 100 }},{{ order.amount|slice(-2) }} €</th>
+							</tr>
 								<tr>
 									<th></th>
 									<th>TOTAL</th>
-									<th>{{ order.amount / 100 }},{{ order.amount|slice(-2) }}
+									<th>{{ (order.amount + taxAmount) / 100 }},{{ order.amount|slice(-2) }}
 										€</th>
 								</tr>
+								<input type="hidden" name="amount" value="{{ order.amount + taxAmount }}">
 							</tfoot>
 						</table>
 					</div>
 					<div class="delivery-choice">
 						<h3>Livraison et plantation</h3>
                         <div>
-							<input type="radio" id="none" name="delivery" checked>
+							<input type="radio" id="none" name="delivery" value="0" checked>
 							<label for="planting">Retrait sur site</label>
 						</div>
 						<div>
-							<input type="radio" id="delivery" name="delivery">
+							<input type="radio" id="delivery" name="delivery" value="1">
 							<label for="delivery">Livraison (+ 80 €)</label>
 						</div>
 						<div>
-							<input type="radio" id="planting" name="delivery">
+							<input type="radio" id="planting" name="delivery" value="2">
 							<label for="planting">Livraison et plantation (+ 130 €)</label>
 						</div>
 					</div>

@@ -11,7 +11,7 @@ use App\Repository\ProductsRepository;
 
 
 /**
- * @Route("/cart", name="cart_")
+ * @Route("/panier", name="cart_")
  */
 class CartController extends AbstractController
 {
@@ -65,7 +65,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/remove/{id}", name="remove", methods={"GET"})
+     * @Route("/suppression/{id}", name="remove", methods={"GET"})
      *
      * @param Request $request
      * @param integer $id

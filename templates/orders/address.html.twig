@@ -1,0 +1,116 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Coordonnées
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="white-block">
+			<div class="col-12 alert alert-warning alert-dismissible fade show" role="alert">
+				Livraisons et plantations dans un rayon de
+				<b>30 km d'Orléans</b>. Pour plus d'informations, merci de consulter nos
+				<a href="">conditions générales de ventes</a>.
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div class="p-3">
+				<h2 class="loginTitle mb-3 text-center">Coordonnées</h2>
+				<form action="{{ path('orders_address', {'number': order.number}) }}" method="post">
+					<div class="table-responsive">
+						<table class="table table-hover cart-table">
+							<thead>
+								<tr>
+									<th scope="col">Commande</th>
+									<th scope="col">Prix</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{ order.number }}</td>
+									<td>{{ order.amount / 100 }},{{ order.amount|slice(-2) }}
+										€</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="address-section">
+						<h3>Mes coordonnées</h3>
+						<div class="accordion mb-3" id="accordionPanelsStayOpenExample">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+									<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+										1 - Informations
+									</button>
+								</h2>
+								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+									<div class="accordion-body row">
+										<div class="col-12 col-md-6 my-2">
+											<input type="text" class="form-control" name="user_name" placeholder="Nom Prénom (société)">
+										</div>
+										<div class="col-12 col-md-6 my-2">
+											<input type="email" class="form-control" placeholder="Email">
+										</div>
+                                        <div class="col-12 col-md-6 my-2">
+											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+										2 - Adresse de facturation
+									</button>
+								</h2>
+								<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+									<div class="accordion-body row">
+										<div class="col-12 my-2">
+											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse">
+										</div>
+										<div class="col-12 my-2">
+											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément">
+										</div>
+										<div class="col-12 col-md-6 my-2">
+											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal">
+										</div>
+										<div class="col-12 col-md-6 my-2">
+											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville">
+										</div>
+									</div>
+								</div>
+							</div>
+							{% if order.isDelivery %}
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="panelsStayOpen-headingThree">
+										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+											3 - Adresse de livraison
+										</button>
+									</h2>
+									<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+										<div class="accordion-body row">
+										<div class="col-12 my-2">
+											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse">
+										</div>
+										<div class="col-12 my-2">
+											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément">
+										</div>
+										<div class="col-12 col-md-6 my-2">
+											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal">
+										</div>
+										<div class="col-12 col-md-6 my-2">
+											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville">
+										</div>
+									</div>
+									</div>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+					<div class="d-flex flex-row-reverse cart-buttons">
+						<input type="submit" class="btn btn-success btn-lg mx-2" value="Payer ma commande">
+						<a href="{{ path('products_index') }}" class="btn btn-outline-dark mx-2">Continuer mes achats</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

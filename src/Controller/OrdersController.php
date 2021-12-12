@@ -36,7 +36,7 @@ class OrdersController extends AbstractController
         $order = new Orders();
         $date = new \DateTime();
         
-        $order->setNumber(uniqid());
+        $order->setNumber(strtoupper(uniqId(rand())));
 
         $products = $_POST['products'];
         $orderItems = [];
@@ -59,11 +59,11 @@ class OrdersController extends AbstractController
         $entityManager->persist($order);
         $entityManager->flush();
 
-        return $this->redirectToRoute('orders_show', ['id' => $order->getId()]);
+        return $this->redirectToRoute('orders_show', ['number' => $order->getNumber()]);
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET", "POST"})
+     * @Route("/{number}", name="show", methods={"GET", "POST"})
      *
      * @param Request $request
      * @param Orders $order
@@ -71,30 +71,76 @@ class OrdersController extends AbstractController
      */
     public function show(Request $request, Orders $order): Response
     {
+        $taxAmount = null;
+
+        foreach ($order->getProducts() as $product) {
+            $taxAmount += $product->getPrice();
+        }
+
+        $taxAmount = round($taxAmount / 100 * 20); // modifier par la value en BDD
+
         if ($request->isMethod('post')) {
             $entityManager = $this->getDoctrine()->getManager();
-            
-            $order->setUser($_POST['user_email']);
+            $date = new \DateTime();
+            $amount = intval($_POST['amount']);
+
+            if ($_POST['delivery'] == "1") {
+                $amount = $amount + self::DELIVERY;
+                $order->setIsDelivery(true);
+            }
+
+            if ($_POST['delivery'] == "2") {
+                $amount = $amount + self::PLANTING;
+                $order->setIsDelivery(true);
+            }
+
+            $order->setAmount($amount);
             $order->setModifiedAt($date);
             $order->setWorkflowState('filled');
-            $order->setBillingAddress($_POST['user_address']);
-            $order->setBillingComplement($_POST['user_complement']);
-            $order->setBillingZipCode($_POST['user_zip_code']);
-            $order->setBillingCity($_POST['user_city']);
+
+            $entityManager->persist($order);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('orders_address', ['number' => $order->getNumber()]);
+        }
+
+        return $this->render('orders/show.html.twig', [
+            'order' => $order,
+            'taxAmount' => $taxAmount
+        ]);
+    }
+
+    /**
+     * @Route("/{number}/adresse", name="address", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @param Orders $order
+     * @return Response
+     */
+    public function addAddress(Request $request, Orders $order): Response
+    {
+        if ($request->isMethod('post')) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $date = new \DateTime();
+
+            $order->setName($_POST['user_name']);
+            $order->setUser($_POST['user_email']);
+            $order->setWorkflowState('addressed');
+            $order->setBillingAddress($_POST['user_billing_address']);
+            $order->setBillingComplement($_POST['user_billing_complement']);
+            $order->setBillingZipCode($_POST['user_billing_zip_code']);
+            $order->setBillingCity($_POST['user_billing_city']);
 
             if ($_POST['user_phone_number']) {
                 $order->setPhoneNumber($_POST['user_phoneNumber']);
             }
 
-            if ($_POST['delivery']) {
+            if (isset($_POST['user_address'])) {
                 $order->setAddress($_POST['user_address']);
                 $order->setComplement($_POST['user_complement']);
                 $order->setZipCode($_POST['user_zip_code']);
                 $order->setCity($_POST['user_city']);
             }
-
-            // ajouter le calcul du montant
-            $order->setAmount();
 
             $entityManager->persist($order);
             $entityManager->flush();
@@ -102,6 +148,6 @@ class OrdersController extends AbstractController
             return $this->render('orders/recap.html.twig', ['order' => $order]);
         }
 
-        return $this->render('orders/show.html.twig', ['order' => $order]);
+        return $this->render('orders/address.html.twig', ['order' => $order]);
     }
 }

@@ -20,7 +20,7 @@ class Orders
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $number;
 
@@ -98,6 +98,16 @@ class Orders
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDelivery;
 
     public function __construct()
     {
@@ -312,6 +322,30 @@ class Orders
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIsDelivery(): ?bool
+    {
+        return $this->isDelivery;
+    }
+
+    public function setIsDelivery(?bool $isDelivery): self
+    {
+        $this->isDelivery = $isDelivery;
 
         return $this;
     }
