@@ -71,13 +71,7 @@ class OrdersController extends AbstractController
      */
     public function show(Request $request, Orders $order): Response
     {
-        $taxAmount = null;
-
-        foreach ($order->getProducts() as $product) {
-            $taxAmount += $product->getPrice();
-        }
-
-        $taxAmount = round($taxAmount / 100 * 20); // modifier par la value en BDD
+        $taxAmount = $this->getTaxAmount($order);
 
         if ($request->isMethod('post')) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -149,5 +143,22 @@ class OrdersController extends AbstractController
         }
 
         return $this->render('orders/address.html.twig', ['order' => $order]);
+    }
+
+    /**
+     *
+     * @param Orders $order
+     * @return integer
+     */
+    private function getTaxAmount(Orders $order): int
+    {
+        $amount = null;
+
+        foreach($order->getProducts() as $product) {
+            $productTax = round($product->getPrice() / 100 * $product->getTax()->getValue());
+            $amount += $productTax;
+        }
+
+        return $amount;
     }
 }
