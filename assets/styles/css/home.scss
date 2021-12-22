@@ -6,46 +6,37 @@
     background-size: cover;
     background-image: url("../../static/images/IMG_3856.jpg");
     background-position-Y: 20%;
-    .home-title {
-        margin: 0;
+    .main-title {
         position: absolute;
-        padding: 0 5%;
         top: 20%;
-        max-width: 50%;
-        h1 {
-            font-family: 'Grethania';
-            font-size: 65px;
-            color: white;
-            text-shadow: 1px 1px 1px black;
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: apparition 0.4s .2s ease-out forwards;
-        }
-        h2 {
-            font-family: 'Gruppo';
-            font-size: 2vw;
-            color: white;
-            text-shadow: 1px 1px 1px black;
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: apparition 0.4s .4s ease-out forwards;
-        }
+        background-color: rgba(#000, .5);
+        border-radius: 100%;
+        width: 500px;
+        height: 500px;
+        margin-left: 5%;
+    }
+    h1 {
+        margin-top: 30%;
+        font-family: 'Grethania';
+        font-size: 55px;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        opacity: 0;
+        transform: translateY(-30px);
+        animation: apparition 0.4s .2s ease-out forwards;
+    }
+    h2 {
+        font-family: 'Gruppo';
+        font-size: 2vw;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        opacity: 0;
+        transform: translateY(-30px);
+        animation: apparition 0.4s .4s ease-out forwards;
     }
     span {
         font-family: 'Gruppo';
         font-size: 30px;
-    }
-}
-
-.black-back {
-    position: relative;
-    background-color: rgba(#000, .5);
-    border-radius: 100%;
-    width: 600px;
-    height: 600px;
-    .main-title {
-        position: absolute;
-        top: 30%;
     }
 }
 
@@ -243,22 +234,27 @@
 }
 
 @media screen and (max-width: 667px) {
-    .black-back {
-        width: 350px;
-        height: 350px;
-        margin-top: 50%;
-        .main-title {
-            position: absolute;
-            top: 30%;
-            h1 {
-                font-size: 40px;
+    .main-title {
+        top: 28% !important;
+        width: 350px !important;
+        height: 350px !important;
+        margin-left: 4% !important;
+    }
+    h1 {
+        margin-top: 30% !important;
+        font-size: 40px !important;
+    }
+    h2 {
+        font-size: 18px !important;
+    }
+    .presentation {
+        .section-2 {
+            .presentation-img {
+                display: none !important;
+            }
+            p {
+                font-size: 25px!important;
             }
         }
-    }
-    .home-title h2 {
-        font-size: 20px !important;
-    }
-    .presentation-img {
-        display: none !important;
     }
 }
