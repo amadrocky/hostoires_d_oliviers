@@ -26,7 +26,7 @@
 							<tbody>
 								<tr>
 									<td>{{ order.number }}</td>
-									<td>{{ order.amount / 100 }},{{ order.amount|slice(-2) }}
+									<td>{{ order.amount / 100 }}
 										€</td>
 								</tr>
 							</tbody>
@@ -44,13 +44,13 @@
 								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 									<div class="accordion-body row">
 										<div class="col-12 col-md-6 my-2">
-											<input type="text" class="form-control" name="user_name" placeholder="Nom Prénom (société)">
+											<input type="text" class="form-control" name="user_name" placeholder="Nom Prénom (société)" {% if app.user %} value="{{ app.user.lastname }} {{ app.user.firstname }}" {% endif %}>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="email" class="form-control" placeholder="Email">
+											<input type="email" class="form-control" placeholder="Email" {% if app.user %} value="{{ app.user.email }}" {% endif %}>
 										</div>
                                         <div class="col-12 col-md-6 my-2">
-											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone">
+											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone" {% if app.user %} value="{{ app.user.phoneNumber }}" {% endif %}>
 										</div>
 									</div>
 								</div>
@@ -64,16 +64,16 @@
 								<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 									<div class="accordion-body row">
 										<div class="col-12 my-2">
-											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse">
+											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse" {% if app.user %} value="{{ app.user.adress }}" {% endif %}>
 										</div>
 										<div class="col-12 my-2">
-											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément">
+											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément" {% if app.user %} value="{{ app.user.complement }}" {% endif %}>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal">
+											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal" {% if app.user %} value="{{ app.user.zipCode }}" {% endif %}>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville">
+											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville" {% if app.user %} value="{{ app.user.city }}" {% endif %}>
 										</div>
 									</div>
 								</div>
@@ -88,16 +88,16 @@
 									<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
 										<div class="accordion-body row">
 										<div class="col-12 my-2">
-											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse">
+											<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse" {% if app.user %} value="{{ app.user.adress }}" {% endif %}>
 										</div>
 										<div class="col-12 my-2">
-											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément">
+											<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément" {% if app.user %} value="{{ app.user.complement }}" {% endif %}>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal">
+											<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal" {% if app.user %} value="{{ app.user.zipCode }}" {% endif %}>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville">
+											<input type="text" class="form-control" name="user_billing_city" placeholder="Ville" {% if app.user %} value="{{ app.user.city }}" {% endif %}>
 										</div>
 									</div>
 									</div>
