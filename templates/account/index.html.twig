@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mon compte
+{% endblock %}
+
+{% block body %}
+	<div class="container page">
+		<div class="white-block">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="col-12 alert alert-{{ type }} alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			<div class="p-3">
+				<h2 class="loginTitle mb-3 text-center">Mon compte</h2>
+				<div class="row justify-content-around account-infos">
+					<div class="col col-md-5 one-block">
+                    <h4>Informations</h4>
+						<div class="text-end">
+							<a href="">
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+						</div>
+                        <p class="text-muted">{{ app.user.email }}</p>
+						<p>{{ app.user.lastname }}</p>
+						<p>{{ app.user.firstname }}</p>
+						<p>{{ app.user.birthdate|date('d-m-Y') }}</p>
+					</div>
+					<div class="col col-md-5 one-block">
+                    <h4>Coordonnées</h4>
+						{% if app.user.adress %}
+							<p>{{ app.user.adress }}</p>
+							<p>{{ app.user.complement }}</p>
+							<p>{{ app.user.zipCode }}</p>
+							<p>{{ app.user.city }}</p>
+						{% else %}
+							<div class="text-end">
+								<a href="">
+									<i class="fas fa-pencil-alt"></i>
+									Ajouter mes coordonnées</a>
+							</div>
+						{% endif %}
+					</div>
+					<div class="col-12 text-center my-4">
+						<a href="{{ path('app_logout') }}" class="text-danger">
+							<i class="fas fa-power-off"></i>
+							Déconnexion</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
