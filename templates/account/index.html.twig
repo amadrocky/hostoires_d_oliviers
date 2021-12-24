@@ -8,7 +8,7 @@
 		<div class="white-block">
 			{% for label, messages in app.flashes %}
 				{% for message in messages %}
-					<div class="col-12 alert alert-{{ type }} alert-dismissible fade show" role="alert">
+					<div class="col-12 alert alert-info alert-dismissible fade show" role="alert">
 						{{ message }}
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
@@ -18,27 +18,32 @@
 				<h2 class="loginTitle mb-3 text-center">Mon compte</h2>
 				<div class="row justify-content-around account-infos">
 					<div class="col col-md-5 one-block">
-                    <h4>Informations</h4>
+						<h4>Informations</h4>
 						<div class="text-end">
-							<a href="">
+							<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								<i class="fas fa-pencil-alt"></i>
 							</a>
 						</div>
-                        <p class="text-muted">{{ app.user.email }}</p>
+						<p class="text-muted">{{ app.user.email }}</p>
 						<p>{{ app.user.lastname }}</p>
 						<p>{{ app.user.firstname }}</p>
 						<p>{{ app.user.birthdate|date('d-m-Y') }}</p>
 					</div>
 					<div class="col col-md-5 one-block">
-                    <h4>Coordonnées</h4>
+						<h4>Coordonnées</h4>
 						{% if app.user.adress %}
+							<div class="text-end">
+								<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									<i class="fas fa-pencil-alt"></i>
+								</a>
+							</div>
 							<p>{{ app.user.adress }}</p>
 							<p>{{ app.user.complement }}</p>
 							<p>{{ app.user.zipCode }}</p>
 							<p>{{ app.user.city }}</p>
 						{% else %}
 							<div class="text-end">
-								<a href="">
+								<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
 									<i class="fas fa-pencil-alt"></i>
 									Ajouter mes coordonnées</a>
 							</div>
@@ -49,8 +54,45 @@
 							<i class="fas fa-power-off"></i>
 							Déconnexion</a>
 					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<form action="{{ path('account_edit') }}" method="post">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Éditer mes informations</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="row justify-content-around">
+											<div class="col col-md-6 my-3">
+												<h6>Informations</h6>
+												<p class="text-muted">{{ app.user.email }}</p>
+												<input type="text" name="user_lastname" class="form-control" value="{{ app.user.lastname }}">
+												<input type="text" name="user_firstname" class="form-control" value="{{ app.user.firstname }}">
+												<input type="date" name="user_birthdate" class="form-control" value="{{ app.user.birthdate|date('Y-m-d') }}">
+											</div>
+											<div class="col col-md-6 my-3">
+												<h6>Coordonnées</h6>
+												<input type="text" name="user_address" class="form-control" value="{{ app.user.adress }}" placeholder="N° Rue, voie, bd...">
+												<input type="text" name="user_complement" class="form-control" value="{{ app.user.complement }}" placeholder="Complément d'adresse">
+												<input type="number" name="user_zipCode" class="form-control" value="{{ app.user.zipCode }}" placeholder="Code postal">
+												<input type="text" name="user_city" class="form-control" value="{{ app.user.city }}" placeholder="Ville">
+												<input type="text" name="user_phoneNumber" class="form-control" value="{{ app.user.phoneNumber }}" placeholder="Téléphone">
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										<button type="submit" class="btn btn-success">Valider</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-{% endblock %}
+</div>{% endblock %}

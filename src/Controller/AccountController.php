@@ -44,12 +44,12 @@ class AccountController extends AbstractController
 
         $user->setLastname($_POST['user_lastname']);
         $user->setFirstname($_POST['user_firstname']);
-        $user->setEmail($_POST['user_email']);
-        $user->setBirthdate($_POST['user_birthdate']);
-        $user->setAdress($_POST['user_adress']);
+        $user->setBirthdate(new \DateTime($_POST['user_birthdate']));
+        $user->setAdress($_POST['user_address']);
         $user->setComplement($_POST['user_complement']);
-        $user->setZipCode($_POST['user_zipcode']);
+        $user->setZipCode(intval($_POST['user_zipCode']));
         $user->setCity($_POST['user_city']);
+        $user->setPhoneNumber($_POST['user_phoneNumber']);
         $user->setModifiedAt(new \DateTime());
         
         $em->persist($user);
