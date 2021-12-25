@@ -49,7 +49,7 @@ class ProductsController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="products_show", methods={"GET"})
+     * @Route("/produit/{id}", name="products_show", methods={"GET"})
      *
      * @param Products $product
      * @return Response
