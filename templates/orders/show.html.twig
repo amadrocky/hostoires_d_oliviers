@@ -29,7 +29,7 @@
 									<tr>
 										<td>#</td>
 										<td>{{ product.name }}</td>
-										<td>{{ product.price / 100 }}
+										<td>{{ (product.price / 100)|number_format(2, ',') }}
 											€</td>
 									</tr>
 								{% endfor %}
@@ -38,12 +38,12 @@
 							<tr>
 								<th></th>
 								<th>TVA</th>
-								<th>{{ taxAmount / 100 |number_format(2, '.') }} €</th>
+								<th>{{ (taxAmount / 100)|number_format(2, ',') }} €</th>
 							</tr>
 								<tr>
 									<th></th>
 									<th>TOTAL</th>
-									<th>{{ (order.amount + taxAmount) / 100 }}
+									<th>{{ ((order.amount + taxAmount) / 100)|number_format(2, ',') }}
 										€</th>
 								</tr>
 								<input type="hidden" name="amount" value="{{ order.amount + taxAmount }}">

@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container page">
 		<div class="white-block">
 			{% for label, messages in app.flashes %}
 				{% for message in messages %}
@@ -41,7 +41,7 @@
 											<td>{{ product[0].name }}</td>
 											<td>{{ product[0].mainDescription }}</td>
 											<td>{{ product[1] }}</td>
-											<td>{{ price / 100 }},{{ price|slice(-2) }}
+											<td>{{ (price / 100)|number_format(2, ',') }}
 												€</td>
 											<td>
 												<a href="{{ path('cart_remove', {'id': product[0].id}) }}" class="btn btn-danger">
@@ -55,7 +55,7 @@
 									<tr>
 										<th colspan="3"></th>
 										<th>TOTAL</th>
-										<th>{{ total / 100 }},{{ total|slice(-2) }}
+										<th>{{ (total / 100)|number_format(2, ',') }}
 											€</th>
 										<th></th>
 										<input type="hidden" name="amount" value="{{ total }}">

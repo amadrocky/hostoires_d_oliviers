@@ -12,8 +12,8 @@
 			<div class="product-price">
 				<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
 					{% if product.originPrice %}
-						<span>{{ product.originPrice / 100 }}
-							€{{ product.originPrice|slice(-2) }}</span>
+						<span>{{ (product.originPrice / 100)|number_format(2, ',') }}
+							€</span>
 					{% endif %}
 				</p>
 			</div>
