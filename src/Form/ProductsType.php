@@ -41,42 +41,49 @@ class ProductsType extends AbstractType
             ])
             ->add('originPrice', IntegerType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Prix d\'origine (si promotion)'
                 ]
             ])
             ->add('mainAttribute1', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Attribut 1'
                 ]
             ])
             ->add('mainAttribute2', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Attribut 2'
                 ]
             ])
             ->add('mainAttribute3', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Attribut 3'
                 ]
             ])
             ->add('descriptionShow1', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Texte descriptif 1'
                 ]
             ])
             ->add('descriptionShow2', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Texte descriptif 2'
                 ]
             ])
             ->add('descriptionShow3', TextareaType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Texte descriptif 3'
                 ]
@@ -97,6 +104,7 @@ class ProductsType extends AbstractType
             ])
             ->add('quantity', IntegerType::class, [
                 'label' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Quantité',
                     'min' => 0

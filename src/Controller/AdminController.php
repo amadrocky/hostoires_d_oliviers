@@ -101,7 +101,6 @@ class AdminController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Produit créé');
             return $this->redirectToRoute('admin_products');
         }
 
