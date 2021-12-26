@@ -1,7 +1,6 @@
 .admin-section {
     padding-top: 68px;
     height: 100vh;
-    overflow: auto;
     .admin-menu {
         height: 100%;
         width: 20vw;
@@ -21,5 +20,12 @@
     }
     .admin-content {
         padding: 50px;
+        max-height: 100%;
+        width: 100%;
+        overflow: auto;
+        .input-photo {
+            max-width: 200px;
+            height: auto;
+        }
     }
 }

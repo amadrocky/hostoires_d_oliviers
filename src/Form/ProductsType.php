@@ -20,18 +20,21 @@ class ProductsType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Nom (titre)'
                 ]
             ])
             ->add('mainDescription', TextType::class, [
                 'label' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Description principale'
                 ]
             ])
             ->add('price', IntegerType::class, [
                 'label' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Prix'
                 ]
@@ -39,7 +42,7 @@ class ProductsType extends AbstractType
             ->add('originPrice', IntegerType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prix d\'origine'
+                    'placeholder' => 'Prix d\'origine (si promotion)'
                 ]
             ])
             ->add('mainAttribute1', TextType::class, [
@@ -80,15 +83,24 @@ class ProductsType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'label' => false,
+                'required' => true,
                 'class' => Categories::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Séléctionnez une catégorie'
             ])
             ->add('tax', EntityType::class, [
                 'label' => false,
+                'required' => true,
                 'class' => Taxes::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Séléctionnez une taxe'
+            ])
+            ->add('quantity', IntegerType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Quantité',
+                    'min' => 0
+                ]
             ])
         ;
     }

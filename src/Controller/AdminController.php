@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Products;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
+use Endroid\QrCode\QrCode;
 
 /**
  * @Route("/admin", name="admin_")
@@ -37,7 +38,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/produits/ajouter", name="products_add", methods={"GET", "POST"})
+     * @Route("/produits/ajouter", name="products_add", methods={"GET","POST"})
      *
      * @param Request $request
      * @return Response
@@ -89,12 +90,19 @@ class AdminController extends AbstractController
             $qrCodeName = uniqId() . '.png';
 
             // Save it to a file
-            $qrCode->writeFile('/var/www/bends/bends/public/bends/images/qrCodes/'. $qrCodeName);
+            $qrCode->writeFile('/var/www/histoiresdoliviers/hostoires_d_oliviers/public/images/qrCodes/'. $qrCodeName);
 
             $product->setQrCode($qrCodeName);
 
+            $product->setCreatedAt();
+            $product->setModifiedAt();
+            $product->setWorkflowState('active');
+
             $entityManager->persist($product);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Produit créé');
+            return $this->redirectToRoute('admin_products');
         }
 
         return $this->render('admin/products/add.html.twig', [
