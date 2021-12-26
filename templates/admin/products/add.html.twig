@@ -1,0 +1,25 @@
+{% extends 'admin/adminLayout.html.twig' %}
+
+{% block title %}Ajouter un produit
+{% endblock %}
+
+{% block content %}
+	<h1>Ajouter un produit</h1>
+	<form action="" method="post" enctype="multipart/form-data">
+		{{ form_start(form) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.category) }}
+		{{ form_row(form.mainDescription) }}
+		{{ form_row(form.price) }}
+		{{ form_row(form.originPrice) }}
+		{{ form_row(form.tax) }}
+		{{ form_row(form.mainAttribute1) }}
+		{{ form_row(form.mainAttribute2) }}
+		{{ form_row(form.mainAttribute3) }}
+		{{ form_row(form.descriptionShow1) }}
+		{{ form_row(form.descriptionShow2) }}
+		{{ form_row(form.descriptionShow3) }}
+		<button class="btn btn-primary btn-block my-3">{{ button_label|default('Valider') }}</button>
+		{{ form_end(form) }}
+	</form>
+{% endblock %}

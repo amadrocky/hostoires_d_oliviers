@@ -32,7 +32,73 @@ class AdminController extends AbstractController
     public function products(ProductsRepository $productsRepository): Response
     {
         return $this->render('admin/products/index.html.twig', [
-            'products' => $productsRepository->findAll(),
+            'products' => $productsRepository->findBy([], ['createdAt' => 'DESC']),
+        ]);
+    }
+
+    /**
+     * @Route("/produits/ajouter", name="products_add", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function addProduct(Request $request): Response
+    {
+        $product = new Products();
+        $form = $this->createForm(ProductsType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            /* Récupération des images */
+            $uploadDir = '/var/www/histoiresdoliviers/hostoires_d_oliviers/public/images/products/';
+            $files = [];
+
+            for ($i = 1; $i <= 3; $i++) {
+                if (isset($_FILES['img' . $i])) {
+                    $fileName = $_FILES['img' . $i]['name'];
+
+                    if ($fileName !== "") {
+                        /* On renomme l'image */
+                        $extention = strrchr($fileName, ".");
+                        $fileName = 'product_image_' . uniqid() . $extention;
+
+                        $uploadFile = $uploadDir . basename($fileName);
+                        move_uploaded_file($_FILES['img' . $i]['tmp_name'], $uploadFile);
+                        $files[] = basename($uploadFile);
+                    }
+                }
+            }
+
+            $product->setPictures($files);
+
+            // Create a basic QR code
+            $qrCode = new QrCode('https://www.histoiresdoliviers.fr/boutique/produit/' . $product->getId());
+            $qrCode->setSize(300);
+
+            // Set advanced options
+            $qrCode->setWriterByName('png');
+            $qrCode->setEncoding('UTF-8');
+            $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0]);
+            $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255]);
+            $qrCode->setValidateResult(false);
+
+            // name qrCode
+            $qrCodeName = uniqId() . '.png';
+
+            // Save it to a file
+            $qrCode->writeFile('/var/www/bends/bends/public/bends/images/qrCodes/'. $qrCodeName);
+
+            $product->setQrCode($qrCodeName);
+
+            $entityManager->persist($product);
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/products/add.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
