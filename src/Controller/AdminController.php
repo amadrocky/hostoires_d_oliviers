@@ -94,8 +94,8 @@ class AdminController extends AbstractController
 
             $product->setQrCode($qrCodeName);
 
-            $product->setCreatedAt();
-            $product->setModifiedAt();
+            $product->setCreatedAt(new \DateTime());
+            $product->setModifiedAt(new \DateTime());
             $product->setWorkflowState('active');
 
             $entityManager->persist($product);
