@@ -54,7 +54,7 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             /* Récupération des images */
-            $uploadDir = '/var/www/histoiresdoliviers.fr/hostoires_d_oliviers/public/images/products/';
+            $uploadDir = '/var/www/histoiresdoliviers.fr/hostoires_d_oliviers/public/build/images/products/';
             $files = [];
 
             for ($i = 1; $i <= 3; $i++) {
@@ -90,7 +90,7 @@ class AdminController extends AbstractController
             $qrCodeName = uniqId() . '.png';
 
             // Save it to a file
-            $qrCode->writeFile('/var/www/histoiresdoliviers.fr/hostoires_d_oliviers/public/images/qrCodes/'. $qrCodeName);
+            $qrCode->writeFile('/var/www/histoiresdoliviers.fr/hostoires_d_oliviers/public/build/images/qrCodes/'. $qrCodeName);
 
             $product->setQrCode($qrCodeName);
 
