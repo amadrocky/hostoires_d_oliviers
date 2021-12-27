@@ -17,20 +17,18 @@
 				<div class="product-description-zone flex-fill">
 					<h3 class="product-description-title">{{ product.name }}</h3>
 					<p class="product-description-subtitle">{{ product.mainDescription }}</p>
-					<div class="d-flex p-3">
-						<div class="product-description-attributes">
-							<p>{{ product.mainAttribute1 }}</p>
-							<p>{{ product.mainAttribute2 }}</p>
-							<p>{{ product.mainAttribute3 }}</p>
-						</div>
-						<div class="product-description-price">
-							<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
-								{% if product.originPrice %}
-									<span>{{ product.originPrice / 100 }}
-										€{{ product.originPrice|slice(-2) }}</span>
-								{% endif %}
-							</p>
-						</div>
+					<div class="product-description-price">
+						<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
+							{% if product.originPrice %}
+								<span>{{ product.originPrice / 100 }}
+									€{{ product.originPrice|slice(-2) }}</span>
+							{% endif %}
+						</p>
+					</div>
+					<div class="product-description-attributes">
+						<p>{{ product.mainAttribute1 }}</p>
+						<p>{{ product.mainAttribute2 }}</p>
+						<p>{{ product.mainAttribute3 }}</p>
 					</div>
 					<form action="{{ path('cart_add') }}" class="mt-4" method="post">
 						<label for="quantity">Quantité</label>
