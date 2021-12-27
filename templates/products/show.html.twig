@@ -9,8 +9,8 @@
 			<div class="d-none d-md-flex">
 				<div id="demo-test-gallery" class="product-images-zone demo-gallery">
 					{% for picture in product.pictures %}
-						<a href="{{ asset('build/images/products/') }}{{ picture }}" data-size="720x1024" data-med="{{ asset('build/images/products/') }}{{ picture }}" data-med-size="720x1024" class="demo-gallery__img--main">
-							<img src="{{ asset('build/images/products/') }}{{ picture }}" itemprop="thumbnail" alt="Photo"/>
+						<a href="{{ asset('images/products/') }}{{ picture }}" data-size="720x1024" data-med="{{ asset('images/products/') }}{{ picture }}" data-med-size="720x1024" class="demo-gallery__img--main">
+							<img src="{{ asset('images/products/') }}{{ picture }}" itemprop="thumbnail" alt="Photo"/>
 						</a>
 					{% endfor %}
 				</div>
