@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Erreur
+{% endblock %}
+
+{% block body %}
+	<div class="container page">
+		<div class="white-block">
+			<h3 class="text-center mb-4">Une erreur est survenue lors du paiement</h3>
+			<p>Le paiement a été annulé ou refusé.</p>
+			<p>Pour toute question, merci de contacter notre équipe.</p>
+			<div class="text-center">
+				<a href="{{ path('home') }}">Retourner à l'accueil</a>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

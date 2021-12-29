@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductsRepository;
 use Stripe\Checkout\Session;
-use Stripe\SetupIntent;
+use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 /**
@@ -162,26 +162,78 @@ class OrdersController extends AbstractController
                         'unit_amount' => $order->getAmount(),
                         'product_data' => [
                             'name' => 'Commande '.$order->getNumber(),
-                            'images' => ["https://bends-community.fr/build/images/Webp.net-resizeimage.png"],
+                            //'images' => ["https://histoiresdoliviers.fr/images/logoFullBlack.png"],
                         ],
                     ],
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => 'https://histoiresdoliviers.fr',
-                'cancel_url' => 'https://histoiresdoliviers.fr',
+                'success_url' => 'https://histoiresdoliviers.fr/commande/'. $order->getNumber() .'/confirmation',
+                'cancel_url' => 'https://histoiresdoliviers.fr/commande/'. $order->getNumber() .'/erreur',
             ];
             $session = Session::create($parameters);
 
-            $this->container->get('session')->set('setup_intent', $session->setup_intent);
+            $this->container->get('session')->set('payment_intent', $session->payment_intent);
 
             return $this->redirect($session->url, Response::HTTP_SEE_OTHER);
-            //$intent = SetupIntent::retrieve($setupIntentId);
-
-            //return $this->render('orders/recap.html.twig', ['order' => $order]);
         }
 
         return $this->render('orders/address.html.twig', ['order' => $order]);
+    }
+
+    /**
+     * @Route("/{number}/confirmation", name="confirmation", methods={"GET"})
+     *
+     * @param Request $request
+     * @param Orders $order
+     * @return Response
+     */
+    public function success(Request $request, Orders $order): Response
+    {
+        $paymentIntent = $request->getSession()->get('payment_intent');
+
+        if (!isset($paymentIntent)){
+            $this->redirectToRoute('home');
+        }
+        Stripe::setApiKey($this->getParameter('stripe_api_key'));
+        $intent = PaymentIntent::retrieve($paymentIntent);
+        
+        if ($intent->status == "succeeded") {
+            $em = $this->getDoctrine()->getManager();
+
+            $order->setWorkflowState('paid');
+
+            $em->persist($order);
+            $em->flush();
+
+            foreach ($request->getSession()->get('cartProducts') as $value) {
+                $product = $this->productsRepository->find(intval($value['id']));
+                $product->setQuantity($product->getQuantity() - intval($value['quantity']));
+
+                $em->persist($product);
+                $em->flush();
+            }
+
+            // Envoyer mail de confirmation
+            
+            $request->getSession()->clear();
+        }
+        
+        return $this->render('orders/success.html.twig', [
+            'order' => $order
+        ]);
+    }
+
+    /**
+     * @Route("/{number}/erreur", name="error", methods={"GET"})
+     *
+     * @param Request $request
+     * @param Orders $order
+     * @return Response
+     */
+    public function error(Request $request, Orders $order): Response
+    {
+        return $this->render('orders/error.html.twig');
     }
 
     /**
