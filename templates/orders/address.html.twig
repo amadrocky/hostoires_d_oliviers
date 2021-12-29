@@ -47,7 +47,7 @@
 											<input type="text" class="form-control" name="user_name" placeholder="Nom Prénom (société)" {% if app.user %} value="{{ app.user.lastname }} {{ app.user.firstname }}" {% endif %} required>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="email" class="form-control" placeholder="Email" {% if app.user %} value="{{ app.user.email }}" {% endif %} required>
+											<input type="email" class="form-control" name="user_email" placeholder="Email" {% if app.user %} value="{{ app.user.email }}" {% endif %} required>
 										</div>
 										<div class="col-12 col-md-6 my-2">
 											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone" {% if app.user %} value="{{ app.user.phoneNumber }}" {% endif %}>

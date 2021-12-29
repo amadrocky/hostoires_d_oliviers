@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductsRepository;
+use Stripe\Checkout\Session;
+use Stripe\SetupIntent;
+use Stripe\Stripe;
 
 /**
  * @Route("/commande", name="orders_")
@@ -119,7 +122,7 @@ class OrdersController extends AbstractController
             $date = new \DateTime();
 
             $order->setName($_POST['user_name']);
-            $order->setUser($_POST['user_email']);
+            $order->setEmail($_POST['user_email']);
             $order->setWorkflowState('addressed');
             $order->setBillingAddress($_POST['user_billing_address']);
             $order->setBillingComplement($_POST['user_billing_complement']);
@@ -127,7 +130,7 @@ class OrdersController extends AbstractController
             $order->setBillingCity($_POST['user_billing_city']);
 
             if ($_POST['user_phone_number']) {
-                $order->setPhoneNumber($_POST['user_phoneNumber']);
+                $order->setPhoneNumber($_POST['user_phone_number']);
             }
 
             if (isset($_POST['user_address'])) {
@@ -140,7 +143,42 @@ class OrdersController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
-            return $this->render('orders/recap.html.twig', ['order' => $order]);
+            // Stripe checkout
+            $stripe = new \Stripe\StripeClient($this->getParameter('stripe_api_key'));
+            $customer = $stripe->customers->create([
+                'email' => $order->getEmail(),
+            ]);
+
+            Stripe::setApiKey($this->getParameter('stripe_api_key'));
+            $parameters = [
+                'customer' => $customer,
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => 'Commande '.$order->getNumber(),
+                        ],
+                        'unit_amount' => $order->getAmount(),
+                        'product_data' => [
+                            'name' => 'Commande '.$order->getNumber(),
+                            'images' => ["https://bends-community.fr/build/images/Webp.net-resizeimage.png"],
+                        ],
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => 'https://histoiresdoliviers.fr',
+                'cancel_url' => 'https://histoiresdoliviers.fr',
+            ];
+            $session = Session::create($parameters);
+
+            $this->container->get('session')->set('setup_intent', $session->setup_intent);
+
+            return $this->redirect($session->url, Response::HTTP_SEE_OTHER);
+            //$intent = SetupIntent::retrieve($setupIntentId);
+
+            //return $this->render('orders/recap.html.twig', ['order' => $order]);
         }
 
         return $this->render('orders/address.html.twig', ['order' => $order]);
