@@ -38,12 +38,12 @@ class OrdersController extends AbstractController
         
         $order->setNumber(strtoupper(uniqId(rand())));
 
-        $products = $_POST['products'];
+        $products = $request->getSession()->get('cartProducts');
         $orderItems = [];
         $orderAmount = $_POST['amount'];
 
         foreach($products as $product) {
-            $orderItems[] = $this->productsRepository->find(intval($product));
+            $orderItems[] = $this->productsRepository->find(intval($product['id']));
         }
 
         foreach($orderItems as $orderItem) {
@@ -71,7 +71,7 @@ class OrdersController extends AbstractController
      */
     public function show(Request $request, Orders $order): Response
     {
-        $taxAmount = $this->getTaxAmount($order);
+        $taxAmount = $this->getTaxAmount($request);
 
         if ($request->isMethod('post')) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -100,7 +100,8 @@ class OrdersController extends AbstractController
 
         return $this->render('orders/show.html.twig', [
             'order' => $order,
-            'taxAmount' => $taxAmount
+            'taxAmount' => $taxAmount,
+            'products' => $this->getCartProducts($request->getSession()->get('cartProducts'))
         ]);
     }
 
@@ -147,18 +148,43 @@ class OrdersController extends AbstractController
 
     /**
      *
+     * @param Request $request
      * @param Orders $order
      * @return integer
      */
-    private function getTaxAmount(Orders $order): int
+    private function getTaxAmount(Request $request): int
     {
         $amount = null;
 
-        foreach($order->getProducts() as $product) {
-            $productTax = round($product->getPrice() / 100 * $product->getTax()->getValue());
+        foreach($this->getCartProducts($request->getSession()->get('cartProducts')) as $product) {
+            $productTax = round($product['product']->getPrice() / 100 * $product['product']->getTax()->getValue());
             $amount += $productTax;
         }
 
         return $amount;
+    }
+
+    /**
+     * Get products objects
+     *
+     * @param [array|null] $sessionProducts
+     * @return void
+     */
+    private function getCartProducts($sessionProducts)
+    {
+        $datas = null;
+
+        if ($sessionProducts != null) {
+            $datas = [];
+
+            foreach ($sessionProducts as $value) {
+                $datas[] = [
+                        'product' => $this->productsRepository->find($value['id']),
+                        'quantity' => intval($value['quantity'])
+                    ];
+                }
+        }
+
+        return $datas;
     }
 }

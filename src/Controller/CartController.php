@@ -31,9 +31,8 @@ class CartController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        //$request->getSession()->clear();
         return $this->render('cart/index.html.twig', [
-            'products' => $this->getCartProducts($request->getSession()->get('cartProductsIds')) ?? null
+            'products' => $this->getCartProducts($request->getSession()->get('cartProducts')) ?? null
         ]);
     }
 
@@ -47,18 +46,21 @@ class CartController extends AbstractController
      */
     public function addToCart(Request $request): RedirectResponse
     {
-        $cartProductsIds = [];
+        $cartProducts = [];
         $id = $_POST['productId'];
         $quantity = $_POST['productQuantity'];
 
-        if ($request->getSession()->get('cartProductsIds')) {
-            $cartProductsIds = $request->getSession()->get('cartProductsIds');
+        if ($request->getSession()->get('cartProducts')) {
+            $cartProducts = $request->getSession()->get('cartProducts');
         }
         
-        $cartProductsIds[$id] = $quantity;
+        $cartProducts[] = [
+            'id' => $id, 
+            'quantity' => $quantity
+        ];
 
-        $request->getSession()->set('cartProductsIds', $cartProductsIds);
-
+        $request->getSession()->set('cartProducts', $cartProducts);
+        
         $this->addFlash('succes', 'Produit ajouté au panier');
 
         return $this->redirectToRoute('products_index');
@@ -73,18 +75,19 @@ class CartController extends AbstractController
      */
     public function removeToCart(Request $request, int $id): RedirectResponse
     {
-        $cartProductsIds = $this->getCartProducts($request->getSession()->get('cartProductsIds'));
-
-        if ($cartProductsIds != null && count($cartProductsIds) > 0) {
+        $cartProducts = $this->getCartProducts($request->getSession()->get('cartProducts'));
+        
+        if ($cartProducts != null && count($cartProducts) > 0) {
             $i = 0;
-            foreach ($cartProductsIds as $value) {
-                if ($value[0]->getId() == $id) {
-                    unset($cartProductsIds[$i]);
+
+            foreach ($cartProducts as $value) {
+                if ($value['product']->getId() == $id) {
+                    unset($cartProducts[$i]);
                     $i++;
                 }
             }
 
-            $request->getSession()->set('cartProductsIds', $cartProductsIds);
+            $request->getSession()->set('cartProducts', $cartProducts);
         }
 
         $this->addFlash('succes', 'Produit retiré du panier');
@@ -104,18 +107,14 @@ class CartController extends AbstractController
 
         if ($sessionProducts != null) {
             $datas = [];
-            $i = 0;
 
-            foreach ($sessionProducts as $key => $value) {
+            foreach ($sessionProducts as $value) {
                 $datas[] = [
-                        $this->productsRepository->find($key),
-                        intval($value)
+                        'product' => $this->productsRepository->find($value['id']),
+                        'quantity' => intval($value['quantity'])
                     ];
-                
-                $i++;
-            }
+                }
         }
-        
 
         return $datas;
     }

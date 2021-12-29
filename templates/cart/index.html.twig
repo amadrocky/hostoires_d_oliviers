@@ -33,18 +33,17 @@
 								<tbody>
 									{% set total = 0 %}
 									{% for product in products %}
-										{% set price = product[0].price * product[1] %}
+										{% set price = product['product'].price * product['quantity'] %}
 										{% set total = total + price %}
 										<tr>
-											<input type="hidden" name="products[]" value="{{ product[0].id }}">
 											<td>#</td>
-											<td>{{ product[0].name }}</td>
-											<td>{{ product[0].mainDescription }}</td>
-											<td>{{ product[1] }}</td>
+											<td>{{ product['product'].name }}</td>
+											<td>{{ product['product'].mainDescription }}</td>
+											<td>{{ product['quantity'] }}</td>
 											<td>{{ (price / 100)|number_format(2, ',') }}
 												€</td>
 											<td>
-												<a href="{{ path('cart_remove', {'id': product[0].id}) }}" class="btn btn-danger">
+												<a href="{{ path('cart_remove', {'id': product['product'].id}) }}" class="btn btn-danger">
 													<i class="fas fa-trash-alt"></i>
 												</a>
 											</td>

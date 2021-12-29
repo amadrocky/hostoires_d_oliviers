@@ -37,7 +37,7 @@
 						<a class="nav-link" href="{{ path('contact_index') }}">Contact</a>
 					</li>
 					<li class="nav-item pt-2 cart-icon">
-						{% if app.session.get('cartProductsIds')|length > 0 %}
+						{% if app.session.get('cartProducts')|length > 0 %}
 							<i class="fas fa-circle"></i>
 						{% endif %}
 						<a href="{{ path('cart_index') }}"><i class="fas fa-shopping-cart"></i></a>
