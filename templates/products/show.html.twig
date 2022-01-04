@@ -26,9 +26,9 @@
 						</p>
 					</div>
 					<div class="product-description-attributes">
-						<p>{{ product.mainAttribute1 }}</p>
-						<p>{{ product.mainAttribute2 }}</p>
-						<p>{{ product.mainAttribute3 }}</p>
+						<p>{{ product.mainAttribute1|raw }}</p>
+						<p>{{ product.mainAttribute2|raw }}</p>
+						<p>{{ product.mainAttribute3|raw }}</p>
 					</div>
 					<form action="{{ path('cart_add') }}" class="mt-4" method="post">
 						<label for="quantity">Quantité</label>
