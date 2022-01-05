@@ -116,6 +116,16 @@ class Products
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mainAttribute4;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mainAttribute5;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -362,6 +372,30 @@ class Products
     public function removeOrder(Orders $order): self
     {
         $this->orders->removeElement($order);
+
+        return $this;
+    }
+
+    public function getMainAttribute4(): ?string
+    {
+        return $this->mainAttribute4;
+    }
+
+    public function setMainAttribute4(?string $mainAttribute4): self
+    {
+        $this->mainAttribute4 = $mainAttribute4;
+
+        return $this;
+    }
+
+    public function getMainAttribute5(): ?string
+    {
+        return $this->mainAttribute5;
+    }
+
+    public function setMainAttribute5(?string $mainAttribute5): self
+    {
+        $this->mainAttribute5 = $mainAttribute5;
 
         return $this;
     }
