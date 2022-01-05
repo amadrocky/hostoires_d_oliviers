@@ -67,6 +67,20 @@ class ProductsType extends AbstractType
                     'placeholder' => 'Attribut 3'
                 ]
             ])
+            ->add('mainAttribute4', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Attribut 4'
+                ]
+            ])
+            ->add('mainAttribute5', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Attribut 5'
+                ]
+            ])
             ->add('descriptionShow1', TextareaType::class, [
                 'label' => false,
                 'required' => false,
