@@ -28,7 +28,7 @@
 							<tbody>
 								{% for product in products %}
 									<tr>
-										<td>#</td>
+										<td><img src="{{ asset('images/products/') }}{{ product['product'].pictures[0] }}" class="miniature" alt="miniature"></td>
 										<td>{{ product['product'].name }}</td>
 										<td>{{ product['quantity'] }}</td>
 										<td>{{ (product['product'].price / 100)|number_format(2, ',') }}

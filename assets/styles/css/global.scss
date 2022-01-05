@@ -153,6 +153,12 @@ p {
     }
 }
 
+.miniature {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+}
+
 @keyframes apparition {
     100% {
         opacity: 1;
@@ -161,6 +167,9 @@ p {
 }
 
 @media screen and (max-width: 667px) {
+    .btn {
+        font-size: 12px !important;
+    }
     .product-img {
         width: 150px !important;
         height: 100%;

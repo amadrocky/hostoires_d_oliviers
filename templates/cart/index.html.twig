@@ -24,7 +24,6 @@
 									<tr>
 										<th scope="col"></th>
 										<th scope="col">Article</th>
-										<th scope="col">Description</th>
 										<th scope="col">Qté</th>
 										<th scope="col">Prix</th>
 										<th scope="col"></th>
@@ -36,12 +35,10 @@
 										{% set price = product['product'].price * product['quantity'] %}
 										{% set total = total + price %}
 										<tr>
-											<td>#</td>
+											<td><img src="{{ asset('images/products/') }}{{ product['product'].pictures[0] }}" class="miniature" alt="miniature"></td>
 											<td>{{ product['product'].name }}</td>
-											<td>{{ product['product'].mainDescription }}</td>
 											<td>{{ product['quantity'] }}</td>
-											<td>{{ (price / 100)|number_format(2, ',') }}
-												€</td>
+											<td>{{ (price / 100)|number_format(2, ',') }} €</td>
 											<td>
 												<a href="{{ path('cart_remove', {'id': product['product'].id}) }}" class="btn btn-danger">
 													<i class="fas fa-trash-alt"></i>
@@ -54,8 +51,7 @@
 									<tr>
 										<th colspan="3"></th>
 										<th>TOTAL</th>
-										<th>{{ (total / 100)|number_format(2, ',') }}
-											€</th>
+										<th>{{ (total / 100)|number_format(2, ',') }} €</th>
 										<th></th>
 										<input type="hidden" name="amount" value="{{ total }}">
 									</tr>

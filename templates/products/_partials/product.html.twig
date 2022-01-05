@@ -6,7 +6,7 @@
 		<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="product-img" alt="photo">
 	</div>
 	<div class="product-text">
-		<p class="product-title">{{ product.name }}</p>
+		<p class="product-title">{{ product.name|capitalize }}</p>
 		<p class="product-description">{{ product.mainDescription }}</p>
 		<div class="product-details">
 			<div class="product-price">
