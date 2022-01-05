@@ -30,10 +30,23 @@ class AdminController extends AbstractController
      * @param ProductsRepository $productsRepository
      * @return Response
      */
-    public function products(ProductsRepository $productsRepository): Response
+    public function productsIndex(ProductsRepository $productsRepository): Response
     {
         return $this->render('admin/products/index.html.twig', [
             'products' => $productsRepository->findBy([], ['createdAt' => 'DESC']),
+        ]);
+    }
+
+    /**
+     * @Route("/produit/{id}", name="products_show", methods={"GET"})
+     *
+     * @param Products $product
+     * @return Response
+     */
+    public function productsShow(Products $product): Response
+    {
+        return $this->render('admin/products/show.html.twig', [
+            'product' => $product,
         ]);
     }
 

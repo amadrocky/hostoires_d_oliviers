@@ -42,7 +42,7 @@
 							<span class="badge rounded-pill bg-primary">{{ product.workflowState }}</span>
 						</td>
 						<td>
-							<a href="" class="btn btn-outline-dark">
+							<a href="{{ path('admin_products_show', {'id': product.id}) }}" class="btn btn-outline-dark">
 								<i class="fas fa-eye"></i>
 							</a>
 						</td>

@@ -4,14 +4,6 @@
 {% endblock %}
 
 {% block content %}
-	{% for label, messages in app.flashes %}
-		{% for message in messages %}
-			<div class="alert alert-info alert-dismissible fade show my-3" role="alert">
-				{{ message }}
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		{% endfor %}
-	{% endfor %}
 	<h1>Ajouter un produit</h1>
 	<form action="{{ path('admin_products_add') }}" method="post" enctype="multipart/form-data">
 		{{ form_start(form) }}

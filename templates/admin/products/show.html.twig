@@ -1,0 +1,116 @@
+{% extends 'admin/adminLayout.html.twig' %}
+
+{% block title %}Consulter un produit
+{% endblock %}
+
+{% block content %}
+	<div class="text-end mb-3">
+		<a href="" class="btn btn-outline-dark">
+			<i class="fas fa-pencil-alt"></i>
+			Modifier le produit</a>
+	</div>
+	<div class="table">
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>id</th>
+				<td>{{ product.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ product.name|capitalize }}</td>
+			</tr>
+			<tr>
+				<th>Catégorie</th>
+				<td>{{ product.category.name }}</td>
+			</tr>
+			<tr>
+				<th>Description main</th>
+				<td>{{ product.mainDescription }}</td>
+			</tr>
+			<tr>
+				<th>Prix</th>
+				<td>{{ (product.price / 100)|number_format(2, ',') }}</td>
+			</tr>
+			{% if product.originPrice %}
+				<tr>
+					<th>Prix d'origine</th>
+					<td>{{ (product.originPrice / 100)|number_format(2, ',') }}</td>
+				</tr>
+			{% endif %}
+			{% if product.mainAttribute1 %}
+				<tr>
+					<th>Attribut 1</th>
+					<td>{{ product.mainAttribute1 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.mainAttribute2 %}
+				<tr>
+					<th>Attribut 2</th>
+					<td>{{ product.mainAttribute2 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.mainAttribute3 %}
+				<tr>
+					<th>Attribut 3</th>
+					<td>{{ product.mainAttribute3 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.mainAttribute4 %}
+				<tr>
+					<th>Attribut 4</th>
+					<td>{{ product.mainAttribute4 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.mainAttribute5 %}
+				<tr>
+					<th>Attribut 5</th>
+					<td>{{ product.mainAttribute5 }}</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<th>Images</th>
+				<td>
+					{% for image in product.pictures %}
+						<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="miniature mx-2" alt="miniature">
+					{% endfor %}
+				</td>
+			</tr>
+			{% if product.descriptionShow1 %}
+				<tr>
+					<th>Texte descriptif 1</th>
+					<td>{{ product.descriptionShow1 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.descriptionShow2 %}
+				<tr>
+					<th>Texte descriptif 2</th>
+					<td>{{ product.descriptionShow2 }}</td>
+				</tr>
+			{% endif %}
+			{% if product.descriptionShow3 %}
+				<tr>
+					<th>Texte descriptif 3</th>
+					<td>{{ product.descriptionShow3 }}</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<th>Date de création</th>
+				<td>{{ product.createdAt|date('d-m-Y H:i') }}</td>
+			</tr>
+			<tr>
+				<th>Date de modification</th>
+				<td>{{ product.modifiedAt|date('d-m-Y H:i') }}</td>
+			</tr>
+			<tr>
+				<th>Quantité</th>
+				<td>{{ product.quantity }}</td>
+			</tr>
+			<tr>
+				<th>Statut</th>
+				<td>
+					<span class="badge rounded-pill bg-primary">{{ product.workflowState }}</span>
+				</td>
+			</tr>
+		</tr>
+	</table>
+</div>{% endblock %}
