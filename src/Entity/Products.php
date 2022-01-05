@@ -31,12 +31,6 @@ class Products
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Taxes::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $tax;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mainDescription;
@@ -156,18 +150,6 @@ class Products
     public function setCategory(?Categories $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getTax(): ?Taxes
-    {
-        return $this->tax;
-    }
-
-    public function setTax(?Taxes $tax): self
-    {
-        $this->tax = $tax;
 
         return $this;
     }

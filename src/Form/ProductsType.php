@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Products;
 use App\Entity\Categories;
-use App\Entity\Taxes;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -108,13 +107,6 @@ class ProductsType extends AbstractType
                 'class' => Categories::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Séléctionnez une catégorie'
-            ])
-            ->add('tax', EntityType::class, [
-                'label' => false,
-                'required' => true,
-                'class' => Taxes::class,
-                'choice_label' => 'name',
-                'placeholder' => 'Séléctionnez une taxe'
             ])
             ->add('quantity', IntegerType::class, [
                 'label' => false,

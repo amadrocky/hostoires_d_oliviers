@@ -15,7 +15,6 @@
 					<th>id</th>
 					<th>Nom</th>
 					<th>Catégorie</th>
-					<th>Taxe</th>
 					<th>Description main</th>
 					<th>Prix</th>
 					<th>Image principale</th>
@@ -32,7 +31,6 @@
 						<td>{{ product.id }}</td>
 						<td>{{ product.name }}</td>
 						<td>{{ product.category.name }}</td>
-						<td>{{ product.tax.name }}</td>
 						<td>{{ product.mainDescription }}</td>
 						<td>{{ (product.price / 100)|number_format(2, ',') }}
 							€</td>

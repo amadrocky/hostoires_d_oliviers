@@ -74,8 +74,6 @@ class OrdersController extends AbstractController
      */
     public function show(Request $request, Orders $order): Response
     {
-        //$taxAmount = $this->getTaxAmount($request);
-
         if ($request->isMethod('post')) {
             $entityManager = $this->getDoctrine()->getManager();
             $date = new \DateTime();
@@ -103,7 +101,6 @@ class OrdersController extends AbstractController
 
         return $this->render('orders/show.html.twig', [
             'order' => $order,
-            //'taxAmount' => $taxAmount,
             'products' => $this->getCartProducts($request->getSession()->get('cartProducts'))
         ]);
     }
@@ -234,24 +231,6 @@ class OrdersController extends AbstractController
     public function error(Request $request, Orders $order): Response
     {
         return $this->render('orders/error.html.twig');
-    }
-
-    /**
-     *
-     * @param Request $request
-     * @param Orders $order
-     * @return integer
-     */
-    private function getTaxAmount(Request $request): int
-    {
-        $amount = null;
-
-        foreach($this->getCartProducts($request->getSession()->get('cartProducts')) as $product) {
-            $productTax = round($product['product']->getPrice() / 100 * $product['product']->getTax()->getValue());
-            $amount += $productTax;
-        }
-
-        return $amount;
     }
 
     /**
