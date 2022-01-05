@@ -74,7 +74,7 @@ class OrdersController extends AbstractController
      */
     public function show(Request $request, Orders $order): Response
     {
-        $taxAmount = $this->getTaxAmount($request);
+        //$taxAmount = $this->getTaxAmount($request);
 
         if ($request->isMethod('post')) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -103,7 +103,7 @@ class OrdersController extends AbstractController
 
         return $this->render('orders/show.html.twig', [
             'order' => $order,
-            'taxAmount' => $taxAmount,
+            //'taxAmount' => $taxAmount,
             'products' => $this->getCartProducts($request->getSession()->get('cartProducts'))
         ]);
     }

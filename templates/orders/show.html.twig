@@ -37,16 +37,12 @@
 								{% endfor %}
 							</tbody>
 							<tfoot>
-							<tr>
-								<th colspan="3" class="text-end">TVA</th>
-								<th>{{ (taxAmount / 100)|number_format(2, ',') }} €</th>
-							</tr>
 								<tr>
 									<th colspan="3" class="text-end">TOTAL</th>
-									<th>{{ ((order.amount + taxAmount) / 100)|number_format(2, ',') }}
+									<th>{{ (order.amount / 100)|number_format(2, ',') }}
 										€</th>
 								</tr>
-								<input type="hidden" name="amount" value="{{ order.amount + taxAmount }}">
+								<input type="hidden" name="amount" value="{{ order.amount }}">
 							</tfoot>
 						</table>
 					</div>
