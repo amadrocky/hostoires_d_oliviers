@@ -18,7 +18,7 @@
 					{% endfor %}
 				</div>
 				<div class="product-description-zone flex-fill">
-					<h3 class="product-description-title">{{ product.name }}</h3>
+					<h3 class="product-description-title">{{ product.name|capitalize }}</h3>
 					<p class="product-description-subtitle">{{ product.mainDescription }}</p>
 					<div class="product-description-price">
 						<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
@@ -50,6 +50,9 @@
 			</div>
 
 			<div class="d-flex d-md-none product-section">
+				<span class="pictures-number">
+					{{ product.pictures|length }}
+				</span>
 				<div id="demo-test-gallery" class="product-images-zone demo-gallery">
 					{% for picture in product.pictures %}
 						<a href="{{ asset('images/products/') }}{{ picture }}" data-size="720x1024" data-med="{{ asset('images/products/') }}{{ picture }}" data-med-size="720x1024" class="demo-gallery__img--main">
@@ -58,7 +61,7 @@
 					{% endfor %}
 				</div>
 				<div class="product-description-zone flex-fill">
-					<h3 class="product-description-title">{{ product.name }}</h3>
+					<h3 class="product-description-title">{{ product.name|capitalize }}</h3>
 					<p class="product-description-subtitle">{{ product.mainDescription }}</p>
 					<div class="text-center product-description-price">
 						<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>

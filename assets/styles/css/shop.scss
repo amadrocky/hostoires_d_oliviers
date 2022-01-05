@@ -30,7 +30,7 @@
     position: relative;
     box-shadow: -1px 5px 5px -4px #000;
     .pictures-number {
-        background-color: $gold;
+        background-color: rgba($gold, .7);
         border-radius: 100%;
         padding: 5px 15px;
         position: absolute;
@@ -152,9 +152,8 @@
     }
     .product-images-zone {
         img {
-            max-width: 150px;
-            height: auto;
-            box-shadow: -1px 5px 5px -4px #000;
+            max-height: 230px;
+            width: auto;
         }
     }
     .product-description-title {
