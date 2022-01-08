@@ -46,7 +46,7 @@ class ContactController extends AbstractController
             $entityManager->flush();
 
             $this->mailer->sendInBlueEmail(
-                $offer->getCreatedBy()->getEmail(),
+                'ak45amad@hotmail.fr',
                 1,
                 [
                     'OBJET' => $form->getData()->getObject()->getName(),
