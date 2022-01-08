@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('account_index');
         }
 
         $em = $this->getDoctrine()->getManager();
