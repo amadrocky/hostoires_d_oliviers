@@ -160,9 +160,9 @@ class AdminController extends AbstractController
                     // Supprime le fichier image stocké
                     unlink($uploadDir . $picture);
                 }
-            }
 
-            $product->setPictures($files);
+                $product->setPictures($files);
+            }
 
             $product->setModifiedAt(new \DateTime());
 

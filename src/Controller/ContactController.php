@@ -45,13 +45,14 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            $this->mailer->sendEmail(
-                null,
-                'ak45amad@hotmail.fr', // A modifier
-                $contact->getObject()->getName(),
-                'emails/contact.html.twig',
-                null,
-                $contact->getMessage()
+            $this->mailer->sendInBlueEmail(
+                $offer->getCreatedBy()->getEmail(),
+                1,
+                [
+                    'OBJET' => $form->getData()->getObject()->getName(),
+                    'FROM' => $form->getData()->getEmail(),
+                    'NOM' => $form->getData()->getName()
+                ]
             );
 
             $this->addFlash('success', 'Votre message à bien été envoyé');

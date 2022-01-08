@@ -9,41 +9,35 @@ use Symfony\Component\Mime\Address;
 
 class MailerService extends AbstractController
 {
-    private $mailer;
-
-    public function __construct(MailerInterface $mailer)
-    {
-        $this->mailer = $mailer;
-    }
-
     /**
+     * Send an email via SendInBlue
      *
-     * @param string $name
-     * @param string $email
-     * @param string $subject
-     * @param string $template
-     * @param string $token
+     * @param string $to
+     * @param integer $templateId
+     * @param array $params
      * @return void
      */
-    public function sendEmail(string $name = null, string $email, string $subject, string $template, string $token = null, $addedVar = null)
+    public function sendInBlueEmail(string $to, int $templateId, array $params)
     {
-        $email = (new TemplatedEmail())
-            ->from('histoiresdoliviers@gmail.com')
-            ->to(new Address($email))
-            ->subject($subject)
+        // Configure API key authorization: api-key
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', $this->getParameter('sendinblue_api_key'));
 
-            // path of the Twig template to render
-            ->htmlTemplate($template)
+        $apiInstance = new TransactionalEmailsApi(
+            // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+            // This is optional, `GuzzleHttp\Client` will be used as default.
+            new Client(),
+            $config
+        );
+        $sendSmtpEmail = new SendSmtpEmail(); // \SendinBlue\Client\Model\SendSmtpEmail | Values to send a transactional email
+        $sendSmtpEmail['to'] = [['email' => $to]];
+        $sendSmtpEmail['templateId'] = $templateId;
+        $sendSmtpEmail['params'] = $params;
+        //$sendSmtpEmail['headers'] = ['X-Mailin-custom' => 'content-type:application/json|accept:application/json'];
 
-            // pass variables (name => value) to the template
-            ->context([
-                'subject' => $subject,
-                'name' => $name,
-                'token' => $token,
-                'addedVar' => $addedVar
-            ])
-        ;
-
-        $this->mailer->send($email);
+        try {
+            $result = $apiInstance->sendTransacEmail($sendSmtpEmail);
+        } catch (Exception $e) {
+            echo 'Exception when calling TransactionalEmailsApi->sendTransacEmail: ', $e->getMessage(), PHP_EOL;
+        }
     }
 }
