@@ -51,7 +51,8 @@ class ContactController extends AbstractController
                 [
                     'OBJET' => $form->getData()->getObject()->getName(),
                     'FROM' => $form->getData()->getEmail(),
-                    'NOM' => $form->getData()->getName()
+                    'NOM' => $form->getData()->getName(),
+                    'MESSAGE' => $form->getData()->getMessage()
                 ]
             );
 
