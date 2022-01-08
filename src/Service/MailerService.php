@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
+use SendinBlue\Client\Configuration;
+use SendinBlue\Client\Api\TransactionalEmailsApi;
+use SendinBlue\Bundle\ApiBundle\SendinBlueApiBundle;
+use SendinBlue\Client\Model\SendSmtpEmail;
+use GuzzleHttp\Client;
 
 class MailerService extends AbstractController
 {
