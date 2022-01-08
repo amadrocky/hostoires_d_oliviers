@@ -121,4 +121,60 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/produit/{id}/edit", name="products_edit", methods={"GET", "POST"})
+     *
+     * @param Products $product
+     * @return Response
+     */
+    public function editProduct(Request $request, Products $product): Response
+    {
+        $form = $this->createForm(ProductsType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $uploadDir = '/var/www/histoiresdoliviers.fr/hostoires_d_oliviers/public/images/products/';
+            $files = [];
+
+            for ($i = 1; $i <= 3; $i++) {
+                if (isset($_FILES['img' . $i])) {
+                    $fileName = $_FILES['img' . $i]['name'];
+
+                    if ($fileName !== "") {
+                        /* On renomme l'image */
+                        $extention = strrchr($fileName, ".");
+                        $fileName = 'product_image_' . uniqid() . $extention;
+
+                        $uploadFile = $uploadDir . basename($fileName);
+                        move_uploaded_file($_FILES['img' . $i]['tmp_name'], $uploadFile);
+                        $files[] = basename($uploadFile);
+                    }
+                }
+            }
+
+            if (count($files) > 0 && count($product->getPictures()) > 0) {
+                foreach ($product->getPictures() as $picture) {
+                    // Supprime le fichier image stocké
+                    unlink($uploadDir . $picture);
+                }
+            }
+
+            $product->setPictures($files);
+
+            $product->setModifiedAt(new \DateTime());
+
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_products_show', ['id' => $product->getId()]);
+        }
+
+        return $this->render('admin/products/edit.html.twig', [
+            'form' => $form->createView(),
+            'product' => $product
+        ]);
+    }
 }
