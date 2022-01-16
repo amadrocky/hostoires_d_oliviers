@@ -3,9 +3,13 @@
 		<div class="col-12 col-md mb-3 text-center">
 			<h5 class="footer-title">Histoires d'Oliviers</h5>
 			<address>
-				00 lorem ipsum<br/>
-				00000 Lorem<br>
-				+33 0 00 00 00 00
+				Orléans - Saran<br/>
+				<div>
+					<a href="tel:0769856867">+33 7 69 85 68 67</a>
+				</div>
+				<div>
+					<a href="mailto:histoiresdoliviers@gmail.com">histoiresdoliviers@gmail.com</a>
+				</div>
 			</address>
 			<div class="text-center">
 				<i class="fab fa-facebook-square mx-3"></i>
@@ -17,18 +21,29 @@
 			<h5>Navigation</h5>
 			<hr/>
 			<ul class="footer-navigation">
-				<li><a href="{{ path('products_index') }}">Boutique</a></li>
-				<li><a href="{{ path('advices') }}">Conseils et entretien</a></li>
-				<li><a href="{{ path('delivery') }}">Livraison et plantation</a></li>
-				<li><a href="{{ path('contact_index') }}">Nous contacter</a></li>
+				<li>
+					<a href="{{ path('products_index') }}">Boutique</a>
+				</li>
+				<li>
+					<a href="{{ path('advices') }}">Conseils et entretien</a>
+				</li>
+				<li>
+					<a href="{{ path('delivery') }}">Livraison et plantation</a>
+				</li>
+				<li>
+					<a href="{{ path('contact_index') }}">Nous contacter</a>
+				</li>
 			</ul>
 		</div>
 		<div class="col-12 col-md mb-3 text-center my-auto">
 			<ul>
-				<li><a href="{{ path('account_index') }}">Mon compte</a></li>
+				<li>
+					<a href="{{ path('account_index') }}">Mon compte</a>
+				</li>
 				<li>Mentions légales</li>
 				<li>Conditions générales de vente</li>
-				<li class="m-auto">Paiement sécurisé avec</li><i class="fab fa-stripe stripe-icon"></i>
+				<li class="m-auto">Paiement sécurisé avec</li>
+				<i class="fab fa-stripe stripe-icon"></i>
 			</ul>
 		</div>
 	</div>

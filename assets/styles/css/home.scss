@@ -11,13 +11,13 @@
         top: 20%;
         background-color: rgba(#000, .5);
         border-radius: 100%;
-        width: 60vh;
-        height: 60vh;
+        width: 75vh;
+        height: 75vh;
         margin-left: 5%;
         h1 {
             margin-top: 30%;
             font-family: 'Grethania';
-            font-size: 6vh;
+            font-size: 8vh;
             color: white;
             text-shadow: 1px 1px 1px black;
             opacity: 0;
@@ -95,20 +95,29 @@
     background-color: white;
     padding: 100px 0px;
     position: relative;
+    //background-image: url("../../static/images/garden-g5cfdf5823_1920.jpg");
     .presentation-img {
+        width: 500px;
         position: absolute;
-        top: 15%;
-        right: 70%;
+        top: -20%;
+        right: 60%;
+        -webkit-transform: scaleX(-1);
+        transform: rotate(85deg) scaleX(-1);
     }
     .section-2 {
         background-color: rgba(white, .9);
         color: black;
         font-size: 20px;
         font-family: 'Montserrat';
-        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+        //box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+        border: 8px solid $gold;
+        border-style: double;
+        border-radius: 15px;
         padding: 100px 10px;
+        .intro {
+            //opacity: 0;
+        }
         p {
-            opacity: 0;
             font-family: 'Noto Serif Display', serif;
             font-size: 30px;
         }
@@ -188,6 +197,7 @@
     h3 {
         font-family: 'Grethania';
         color: $gold;
+        font-size: 40px;
         i {
             font-size: 50px;
         }
@@ -223,9 +233,9 @@
 .home-delivery {
     padding: 100px 10px;
     background: #fff;
-    background-image: linear-gradient(330deg, rgba(255, 255, 255, 1) 50%, rgba(0, 0, 0, 0) 100%), url('../../static/images/garden-g5cfdf5823_1920.jpg');
+    background-image: linear-gradient(330deg, rgba(255, 255, 255, 1) 30%, rgba(0, 0, 0, 0) 100%), url('../../static/images/IMG_1078.jpg');
     background-size: cover;
-    background-position-Y: -50%;
+    background-position-Y: 40%;
     p {
         font-family: 'Noto Serif Display', serif;
         font-size: 30px;
@@ -254,6 +264,19 @@
             }
             p {
                 font-size: 25px!important;
+            }
+        }
+    }
+    .home-store {
+        .btn-three {
+            font-size: 25px !important;
+        }
+    }
+    .comment-section {
+        h3 {
+            font-size: 30px !important;
+            i {
+                font-size: 40px;
             }
         }
     }

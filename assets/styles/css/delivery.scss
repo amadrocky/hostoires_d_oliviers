@@ -1,6 +1,6 @@
 .delivery-tape {
-    background-image: linear-gradient(330deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%), url('../../static/images/IMG_3855.jpg');
-    background-position-y: 40%;
+    background-image: linear-gradient(330deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%), url('../../static/images/Resized_20210820_123107.jpg');
+    background-position-y: 60%;
 }
 
 .delivery-block {
@@ -9,13 +9,10 @@
     border-right: 1px solid $gold;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    h2 {
-        font-family: 'Noto Serif Display', serif;
-        font-size: 50px;
-    }
     img {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
         border-radius: 100%;
     }
 }
