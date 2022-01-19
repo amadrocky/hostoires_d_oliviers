@@ -69,7 +69,7 @@ document.getElementById('presentation').scrollIntoView({behavior: 'smooth'});
 
 var body = document.getElementsByTagName("body")[0];
 var parent = document.getElementById("presentation");
-var child = document.getElementById("intro");
+var child = document.querySelector('.intro');
 body.onscroll = function () {
 if (document.documentElement.scrollTop >= (parent.offsetTop - 600)) {
 child.classList.add('appear');
