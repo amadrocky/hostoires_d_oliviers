@@ -11,6 +11,7 @@ use App\Repository\ProductsRepository;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
+use App\Service\MailerService;
 
 /**
  * @Route("/commande", name="orders_")
@@ -22,12 +23,18 @@ class OrdersController extends AbstractController
      */
     private $productsRepository;
 
+    /**
+     * @var MailerService
+     */
+    private $mailer;
+
     private const DELIVERY = 8000;
     private const PLANTING = 13000;
 
-    public function __construct(ProductsRepository $productsRepository) 
+    public function __construct(ProductsRepository $productsRepository, MailerService $mailer) 
     {
         $this->productsRepository = $productsRepository;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -211,7 +218,25 @@ class OrdersController extends AbstractController
                 $em->flush();
             }
 
-            // Envoyer mail de confirmation
+            if ($order->getIsDelivery()) {
+                $this->mailer->sendInBlueEmail(
+                    $order->getEmail(),
+                    2,
+                    [
+                        'COMMANDE' => $order->getNumber(),
+                        'NOM' => $order->getName(),
+                    ]
+                );
+            } else {
+                $this->mailer->sendInBlueEmail(
+                    $order->getEmail(),
+                    3,
+                    [
+                        'COMMANDE' => $order->getNumber(),
+                        'NOM' => $order->getName(),
+                    ]
+                );
+            }
             
             $request->getSession()->clear();
         }
