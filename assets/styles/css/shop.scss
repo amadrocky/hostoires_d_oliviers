@@ -20,7 +20,7 @@
         }
         p {
             font-family: 'Noto Serif Display', serif;
-            font-size: 2vw;
+            font-size: 25px;
             display: inline-block;
             vertical-align: middle;
         }
@@ -147,6 +147,16 @@
 @media screen and (max-width: 667px) {
     .block-title-head h1 {
         font-size: 70px;
+    }
+    .white-block {
+        margin-top: 0 !important;
+    }
+    .filters {
+        .filter {
+            p {
+                font-size: 10px !important;
+            }
+        }
     }
     .product-description-zone {
         padding: 10px !important;
