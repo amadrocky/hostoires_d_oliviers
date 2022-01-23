@@ -166,7 +166,7 @@ class OrdersController extends AbstractController
                         'unit_amount' => $order->getAmount(),
                         'product_data' => [
                             'name' => 'Commande '.$order->getNumber(),
-                            'images' => ["https://histoiresdoliviers.fr/build/images/logoFullBlack.png"],
+                            'images' => ["https://histoiresdoliviers.fr/build/images/logoFullBlackGold.png"],
                         ],
                     ],
                     'quantity' => 1,
