@@ -11,8 +11,17 @@
 {% block body %}
 	<div class="admin-section d-flex">
 		<div class="admin-menu bg-dark">
-			<a href="{{ path('admin_products') }}" class="menu-link">
+			<a href="{{ path('admin_products') }}" class="menu-link {{ app.request.attributes.get('_route') == 'admin_products' ? 'active' : '' }}">
 				Produits
+			</a>
+			<a href="{{ path('admin_orders') }}" class="menu-link {{ app.request.attributes.get('_route') == 'admin_orders' ? 'active' : '' }}">
+				Commandes
+			</a>
+			<a href="" class="menu-link">
+				Utilisateurs
+			</a>
+			<a href="" class="menu-link">
+				Messages
 			</a>
 		</div>
 		<div class="admin-content">

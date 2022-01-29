@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Products;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
+use App\Repository\OrdersRepository;
 use Endroid\QrCode\QrCode;
 
 /**
@@ -175,6 +176,19 @@ class AdminController extends AbstractController
         return $this->render('admin/products/edit.html.twig', [
             'form' => $form->createView(),
             'product' => $product
+        ]);
+    }
+
+    /**
+     * @Route("/commandes", name="orders", methods={"GET"})
+     *
+     * @param OrdersRepository $ordersRepository
+     * @return Response
+     */
+    public function ordersIndex(OrdersRepository $ordersRepository): Response
+    {
+        return $this->render('admin/orders/index.html.twig', [
+            'orders' => $ordersRepository->findBy(['workflowState' => 'paid'], ['modifiedAt' => 'DESC'])
         ]);
     }
 }

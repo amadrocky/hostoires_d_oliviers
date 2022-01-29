@@ -18,6 +18,10 @@
             }
         }
     }
+    .active {
+        background-color: $gold !important;
+        color: black !important;
+    }
     .admin-content {
         padding: 50px;
         max-height: 100%;
