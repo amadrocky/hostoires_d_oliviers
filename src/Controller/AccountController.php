@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\OrdersRepository;
 
 /**
      * @Route("/espace-client", name="account_")
@@ -18,7 +19,7 @@ class AccountController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request, OrdersRepository $ordersRepository): Response
     {
         $user = $this->getuser();
 
@@ -27,7 +28,8 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/index.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $user,
+            'orders' => $ordersRepository->findByUser($user->getEmail())
         ]);
     }
 

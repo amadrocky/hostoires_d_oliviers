@@ -19,6 +19,26 @@ class OrdersRepository extends ServiceEntityRepository
         parent::__construct($registry, Orders::class);
     }
 
+    /**
+     *
+     * @param string $email
+     * @return array
+     */
+    public function findByUser(string $email): array
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.email = :email')
+            ->andWhere('o.workflowState = :workflow_state')
+            ->setParameters([
+                'workflow_state' => 'paid',
+                'email' => $email
+            ])
+            ->orderBy('o.modifiedAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Orders[] Returns an array of Orders objects
     //  */
