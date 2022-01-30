@@ -4,34 +4,34 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container page">
 		<div class="block-title-head shop-tape">
 			<h1>Boutique</h1>
 		</div>
 		<div class="row filters d-none d-md-flex py-3">
 			<div class="col col-md-3 p-2">
-				<div class="filter p-3 text-center">
+				<div id="all" class="filter p-3 text-center active" onclick="displayAllCategories()">
 					<p class="m-auto">Toute la boutique</p>
 				</div>
 			</div>
 			<div class="col col-md-3 p-2">
-				<div class="filter p-3 text-center">
+				<div id="Oliviers" class="filter p-3 text-center" onclick="displayCategory('Oliviers')">
 					<p class="m-auto">Oliviers</p>
 				</div>
 			</div>
 			<div class="col col-md-3 p-2">
-				<div class="filter p-3 text-center">
+				<div id="Palmiers" class="filter p-3 text-center" onclick="displayCategory('Palmiers')">
 					<p class="m-0">Palmiers</p>
 				</div>
 			</div>
 			<div class="col col-md-3 p-2">
-				<div class="filter p-3 text-center">
+				<div id="Décorations" class="filter p-3 text-center" onclick="displayCategory('Décorations')">
 					<p class="m-0">Décorations</p>
 				</div>
 			</div>
 		</div>
 		<div class="mobile-filters my-4">
-			<select name="" id="" class="form-control d-md-none">
+			<select id="mobile-filter" class="form-control d-md-none">
 				<option value="All" selected>Toute la boutique</option>
 				<option value="Oliviers">Oliviers</option>
 				<option value="Palmiers">Palmiers</option>
@@ -48,10 +48,55 @@
 				{% endfor %}
 			{% endfor %}
 			{% for product in products %}
-				<div class="col col-md-6 my-3">
+				<div class="col col-md-6 my-3 product {{ product.category.name }}">
 					{% include('products/_partials/product.html.twig') %}
 				</div>
 			{% endfor %}
 		</div>
 	</div>
+
+	<script>
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		if (urlParams.get('filter') !== null) {
+			this.displayCategory(urlParams.get('filter'));
+		}
+
+		function displayAllCategories() {
+			const elements = document.querySelectorAll('.product');
+
+			elements.forEach((element) => {
+				element.classList.remove('d-none');
+			});
+
+			document.querySelector('.active').classList.remove('active');
+			document.getElementById('all').classList.add('active');
+		}
+
+		function displayCategory(show) {
+			const elements = document.querySelectorAll('.product');
+
+			const category = document.querySelectorAll(`.${show}`);
+
+			elements.forEach((element) => {
+				element.classList.add('d-none');
+			});
+
+			category.forEach((element) => {
+				element.classList.remove('d-none');
+			});
+
+			document.querySelector('.active').classList.remove('active');
+			document.getElementById(`${show}`).classList.add('active');
+		}
+
+		const select = document.querySelector('#mobile-filter');
+		select.addEventListener('change', (event) => {
+			if (event.target.value == 'All') {
+				this.displayAllCategories();
+			} else {
+				this.displayCategory(`${event.target.value}`);
+			}
+		});
+	</script>
 {% endblock %}
