@@ -10,7 +10,7 @@
 		</div>
 		<div class="row filters d-none d-md-flex py-3">
 			<div class="col col-md-3 p-2">
-				<div id="all" class="filter p-3 text-center active" onclick="displayAllCategories()">
+				<div id="all" class="filter p-3 text-center active-filter" onclick="displayAllCategories()">
 					<p class="m-auto">Toute la boutique</p>
 				</div>
 			</div>
@@ -69,8 +69,8 @@
 				element.classList.remove('d-none');
 			});
 
-			document.querySelector('.active').classList.remove('active');
-			document.getElementById('all').classList.add('active');
+			document.querySelector('.active-filter').classList.remove('active-filter');
+			document.getElementById('all').classList.add('active-filter');
 		}
 
 		function displayCategory(show) {
@@ -86,8 +86,8 @@
 				element.classList.remove('d-none');
 			});
 
-			document.querySelector('.active').classList.remove('active');
-			document.getElementById(`${show}`).classList.add('active');
+			document.querySelector('.active-filter').classList.remove('active-filter');
+			document.getElementById(`${show}`).classList.add('active-filter');
 		}
 
 		const select = document.querySelector('#mobile-filter');

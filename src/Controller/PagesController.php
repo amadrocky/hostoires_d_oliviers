@@ -10,6 +10,8 @@ class PagesController extends AbstractController
 {
     /**
      * @Route("/conseils-entretien", name="advices")
+     *
+     * @return Response
      */
     public function advicesPage(): Response
     {
@@ -18,9 +20,21 @@ class PagesController extends AbstractController
 
     /**
      * @Route("/livraison-plantation", name="delivery")
+     *
+     * @return Response
      */
     public function deliveryPage(): Response
     {
         return $this->render('pages/delivery.html.twig');
+    }
+
+    /**
+     * @Route("/mentions-legales", name="legal")
+     *
+     * @return Response
+     */
+    public function legalpage(): Response
+    {
+        return $this->render('pages/legal.html.twig');
     }
 }
