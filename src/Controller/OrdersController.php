@@ -237,6 +237,12 @@ class OrdersController extends AbstractController
                     ]
                 );
             }
+
+            $this->mailer->sendInBlueEmail(
+                'histoiresdoliviers@gmail.com',
+                4,
+                []
+            );
             
             $request->getSession()->clear();
         }

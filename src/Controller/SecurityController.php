@@ -10,8 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Service\MailerService;
 class SecurityController extends AbstractController
 {
+    /**
+     * @var MailerService
+     */
+    private $mailer;
+
+    public function __construct(MailerService $mailer) 
+    {
+        $this->mailer = $mailer;
+    }
+
    /**
     * @Route("/login", name="app_login")
     *
@@ -64,6 +75,14 @@ class SecurityController extends AbstractController
             $user->setWorkflowState('created');
             $em->persist($user);
             $em->flush();
+
+            $this->mailer->sendInBlueEmail(
+                $user->getEmail(),
+                5,
+                [
+                    'NOM' => $user->getFirstName(),
+                ]
+            );
 
             $this->addFlash('success', 'Votre compte utilisateur a bien été créé.');
 
