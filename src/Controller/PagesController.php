@@ -37,4 +37,14 @@ class PagesController extends AbstractController
     {
         return $this->render('pages/legal.html.twig');
     }
+
+    /**
+     * @Route("/CGU", name="CGU")
+     *
+     * @return Response
+     */
+    public function CGU(): Response
+    {
+        return $this->render('pages/CGU.html.twig');
+    }
 }
