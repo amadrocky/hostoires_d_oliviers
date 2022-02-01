@@ -71,7 +71,7 @@
 				<th>Images</th>
 				<td>
 					{% for image in product.pictures %}
-						<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="miniature mx-2" alt="miniature">
+						<img src="{{ asset('images/products/') }}{{ image }}" class="miniature mx-2" alt="miniature">
 					{% endfor %}
 				</td>
 			</tr>
