@@ -61,7 +61,7 @@ class ProductsController extends AbstractController
         $datas = [];
         
         foreach(array_rand($featuredProducts, $max) as $value) {
-            $datas[] = $productsRepository->find($value);
+            $datas[] = $featuredProducts[$value];
         }
 
         return $this->render('products/show.html.twig', [

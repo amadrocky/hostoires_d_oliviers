@@ -1,12 +1,14 @@
-<div class="suggest-card">
-	<div class="suggest-card-image-zone">
-		<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" alt="photo">
+<a href="{{ path('products_show', {'id': product.id}) }}" class="suggest-product-link">
+	<div class="suggest-card">
+		<div class="suggest-card-image-zone">
+			<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" alt="photo">
+		</div>
+		<p class="suggest-card-description">{{ product.name|capitalize }}</p>
+		<p class="suggest-card-price">{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
+			{% if product.originPrice %}
+				<span>{{ product.originPrice / 100 }}
+					€{{ product.originPrice|slice(-2) }}</span>
+			{% endif %}
+		</p>
 	</div>
-	<p class="suggest-card-description">{{ product.name|capitalize }}</p>
-	<p class="suggest-card-price">{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
-		{% if product.originPrice %}
-			<span>{{ product.originPrice / 100 }}
-				€{{ product.originPrice|slice(-2) }}</span>
-		{% endif %}
-	</p>
-</div>
+</a>
