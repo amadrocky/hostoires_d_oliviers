@@ -21,7 +21,7 @@ class ProductsController extends AbstractController
     public function index(ProductsRepository $productsRepository): Response
     {
         return $this->render('products/index.html.twig', [
-            'products' => $productsRepository->findAll(),
+            'products' => $productsRepository->getEnabledProducts(),
         ]);
     }
 
@@ -54,10 +54,19 @@ class ProductsController extends AbstractController
      * @param Products $product
      * @return Response
      */
-    public function show(Products $product): Response
+    public function show(Products $product, ProductsRepository $productsRepository): Response
     {
+        $featuredProducts = array_filter($productsRepository->getEnabledProducts(), function($el) use ($product){return $el !== $product;});
+        $max = count($featuredProducts) > 3 ? 3 : count($featuredProducts);
+        $datas = [];
+        
+        foreach(array_rand($featuredProducts, $max) as $value) {
+            $datas[] = $productsRepository->find($value);
+        }
+
         return $this->render('products/show.html.twig', [
             'product' => $product,
+            'featuredProducts' => $datas,
         ]);
     }
 

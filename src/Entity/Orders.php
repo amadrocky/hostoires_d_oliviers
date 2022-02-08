@@ -349,4 +349,15 @@ class Orders
 
         return $this;
     }
+
+    public function hasTree(): bool
+    {
+        foreach ($this->getProducts() as $product){
+            if ($product->getCategory()->getId() !== 3) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

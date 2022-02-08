@@ -28,8 +28,8 @@ class OrdersController extends AbstractController
      */
     private $mailer;
 
-    private const DELIVERY = 8000;
-    private const PLANTING = 13000;
+    private const DELIVERY = 13000;
+    private const PLANTING = 25000;
 
     public function __construct(ProductsRepository $productsRepository, MailerService $mailer) 
     {
@@ -85,15 +85,21 @@ class OrdersController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $date = new \DateTime();
             $amount = intval($_POST['amount']);
-
-            if ($_POST['delivery'] == "1") {
-                $amount = $amount + self::DELIVERY;
+            
+            if (isset($_POST['free'])) {
                 $order->setIsDelivery(true);
-            }
+            } else {
+                if (isset($_POST['delivery'])) {
+                    if ($_POST['delivery'] == "1") {
+                        $amount = $amount + self::DELIVERY;
+                        $order->setIsDelivery(true);
+                    }
 
-            if ($_POST['delivery'] == "2") {
-                $amount = $amount + self::PLANTING;
-                $order->setIsDelivery(true);
+                    if ($_POST['delivery'] == "2") {
+                        $amount = $amount + self::PLANTING;
+                        $order->setIsDelivery(true);
+                    }
+                }
             }
 
             $order->setAmount($amount);

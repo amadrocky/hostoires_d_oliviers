@@ -141,9 +141,17 @@
         }
         .suggest-card-price {
             margin: 0;
-            font-size: 50px;
+            font-size: 40px;
             color: $gold;
             text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+            position: relative;
+            text-align: center;
+            sup {
+                position: absolute;
+                top: 15px;
+                left: auto;
+                font-size: 12px;
+            }
             span {
                 font-size: 10px;
                 text-decoration: line-through;

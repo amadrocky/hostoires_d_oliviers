@@ -19,6 +19,18 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
+    public function getEnabledProducts()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.workflowState = :workflow_state')
+            ->andWhere('p.quantity > 0')
+            ->setParameter('workflow_state', 'active')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     
     public function getLastThree()
     {

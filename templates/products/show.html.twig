@@ -179,8 +179,8 @@
 	<div class="product-suggest-zone d-none d-md-block">
 		<div class="container py-2">
 			<h3>Vous aimerez aussi</h3>
-			<div class="row">
-				{% for i in 0..2 %}
+			<div class="row justify-content-center">
+				{% for product in featuredProducts %}
 					<div class="col col-md-4 justify-content-center">
 						{% include('products/_partials/lightProduct.html.twig') %}
 					</div>
@@ -198,22 +198,13 @@
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<div class="row justify-content-center">
-						{% include('products/_partials/lightProduct.html.twig') %}
+				{% for product in featuredProducts %}
+					<div class="carousel-item">
+						<div class="row justify-content-center">
+							{% include('products/_partials/lightProduct.html.twig') %}
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="row justify-content-center">
-						{% include('products/_partials/lightProduct.html.twig') %}
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="row justify-content-center">
-						{% include('products/_partials/lightProduct.html.twig') %}
-					</div>
-				</div>
-
+				{% endfor %}
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>

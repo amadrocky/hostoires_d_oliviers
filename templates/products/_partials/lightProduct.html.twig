@@ -1,9 +1,12 @@
 <div class="suggest-card">
 	<div class="suggest-card-image-zone">
-		<img src="{{ asset('build/images/olivier-d-europe-609764-2.jpg') }}" alt="photo">
+		<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" alt="photo">
 	</div>
-	<p class="suggest-card-description">Lorem ipsum dolor</p>
-	<p class="suggest-card-price">25<sup>€</sup>
-		<span>50 €</span>
+	<p class="suggest-card-description">{{ product.name|capitalize }}</p>
+	<p class="suggest-card-price">{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
+		{% if product.originPrice %}
+			<span>{{ product.originPrice / 100 }}
+				€{{ product.originPrice|slice(-2) }}</span>
+		{% endif %}
 	</p>
 </div>
