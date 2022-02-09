@@ -84,21 +84,24 @@ class ProductsType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Texte descriptif 1'
+                    'placeholder' => 'Texte descriptif 1',
+                    'maxlength' => 255
                 ]
             ])
             ->add('descriptionShow2', TextareaType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Texte descriptif 2'
+                    'placeholder' => 'Texte descriptif 2',
+                    'maxlength' => 255
                 ]
             ])
             ->add('descriptionShow3', TextareaType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Texte descriptif 3'
+                    'placeholder' => 'Texte descriptif 3',
+                    'maxlength' => 255
                 ]
             ])
             ->add('category', EntityType::class, [

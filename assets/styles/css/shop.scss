@@ -163,9 +163,13 @@
     }
 }
 
+.product-link,
 .suggest-product-link {
     text-decoration: none;
     color: black;
+    &:hover {
+        color: black;
+    }
 }
 
 @media screen and (max-width: 667px) {
