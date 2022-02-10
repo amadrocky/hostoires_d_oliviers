@@ -43,7 +43,7 @@
 					</form>
 					<div class="product-indication mt-3">
 						<p>
-							<small class="text-danger">* Livraison et plantation dans un rayon de 30 kilomètres autour d'Orléans</small>
+							<small class="text-danger">* Livraison {{ (product.category.id == 3) ? 'offerte' : 'et plantation' }} dans un rayon de 30 kilomètres autour d'Orléans</small>
 						</p>
 					</div>
 				</div>
@@ -96,6 +96,7 @@
 						</p>
 					</div>
 				</div>
+				{{ dump(product) }}
 			</div>
 
 			<!-- Root element of PhotoSwipe. Must have class pswp. -->
