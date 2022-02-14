@@ -31,5 +31,29 @@
             max-width: 200px;
             height: auto;
         }
+        .indicators {
+            padding: 20px 0;
+            .indicator {
+                text-align: center;
+                border: 1px solid $gold;
+                border-radius: 5px;
+                padding: 20px 0;
+                margin-bottom: 20px;
+            }
+            a {
+                display: block;
+                color: black;
+                text-decoration: none;
+                text-align: center;
+                border: 1px solid $gold;
+                border-radius: 5px;
+                padding: 10px 0;
+                margin-bottom: 20px;
+                &:hover {
+                    color: white;
+                    background-color: $gold;
+                }
+            }
+        }
     }
 }

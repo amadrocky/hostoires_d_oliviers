@@ -3,3 +3,40 @@
 {% block title %}Éspace administration
 {% endblock %}
 
+{% block content %}
+	<h1>Éspace administration</h1>
+	<div class="row indicators">
+		<div class="col admin-number">
+			<div class="indicator">
+				{{ countProducts }}
+			</div>
+            <a href="{{ path('admin_products') }}" class="text-block">
+                Produits
+            </a>
+		</div>
+		<div class="col admin-number">
+			<div class="indicator">
+				{{ countOrders }}
+			</div>
+            <a href="{{ path('admin_orders') }}" class="text-block">
+                Commandes
+            </a>
+		</div>
+		<div class="col admin-number">
+			<div class="indicator">
+				{{ countUsers }}
+			</div>
+            <a href="" class="text-block">
+                Utilisateurs
+            </a>
+		</div>
+		<div class="col admin-number">
+			<div class="indicator">
+				{{ countMessages }}
+			</div>
+            <a href="" class="text-block">
+                Messages
+            </a>
+		</div>
+	</div>
+{% endblock %}

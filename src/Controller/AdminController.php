@@ -10,6 +10,8 @@ use App\Entity\Products;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
 use App\Repository\OrdersRepository;
+use App\Repository\UserRepository;
+use App\Repository\ContactRepository;
 use Endroid\QrCode\QrCode;
 
 /**
@@ -17,24 +19,41 @@ use Endroid\QrCode\QrCode;
  */
 class AdminController extends AbstractController
 {
+    public function __construct(
+        ProductsRepository $productsRepository,
+        OrdersRepository $ordersRepository,
+        UserRepository $userRepository,
+        ContactRepository $contactRepository 
+    )
+    {
+        $this->productsRepository = $productsRepository;
+        $this->ordersRepository = $ordersRepository;
+        $this->userRepository = $userRepository;
+        $this->contactRepository = $contactRepository;
+    }
+
     /**
      * @Route("/", name="index")
      */
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig', [
+            'countProducts' => count($this->productsRepository->findByWorkflowState('active')),
+            'countOrders' => count($this->ordersRepository->findByWorkflowState('paid')),
+            'countUsers' => count($this->userRepository->findAll()),
+            'countMessages' => count($this->contactRepository->findByWorkflowState('active'))
+        ]);
     }
 
     /**
      * @Route("/produits", name="products", methods={"GET"})
      *
-     * @param ProductsRepository $productsRepository
      * @return Response
      */
-    public function productsIndex(ProductsRepository $productsRepository): Response
+    public function productsIndex(): Response
     {
         return $this->render('admin/products/index.html.twig', [
-            'products' => $productsRepository->findBy([], ['createdAt' => 'DESC']),
+            'products' => $this->productsRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 
@@ -182,13 +201,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/commandes", name="orders", methods={"GET"})
      *
-     * @param OrdersRepository $ordersRepository
      * @return Response
      */
-    public function ordersIndex(OrdersRepository $ordersRepository): Response
+    public function ordersIndex(): Response
     {
         return $this->render('admin/orders/index.html.twig', [
-            'orders' => $ordersRepository->findBy(['workflowState' => 'paid'], ['modifiedAt' => 'DESC'])
+            'orders' => $this->ordersRepository->findBy(['workflowState' => 'paid'], ['modifiedAt' => 'DESC'])
         ]);
     }
 }
