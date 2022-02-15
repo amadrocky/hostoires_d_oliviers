@@ -80,7 +80,7 @@
 				<th>Produits</th>
 				<td>
 					{% for product in order.products %}
-						<div class="d-flex">
+						<div class="d-flex mb-1">
 							<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="miniature mx-2" alt="miniature">
 							<p class="my-auto">{{ product.name }}</p>
 						</div>
