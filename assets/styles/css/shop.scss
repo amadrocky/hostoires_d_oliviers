@@ -178,6 +178,7 @@
     }
     .white-block {
         margin-top: 0 !important;
+        padding: 0 !important;
     }
     .filters {
         .filter {
@@ -227,5 +228,8 @@
         h3 {
             font-size: 25px !important;
         }
+    }
+    .product {
+        padding: 0 !important;
     }
 }
