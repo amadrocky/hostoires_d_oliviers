@@ -3,7 +3,11 @@
 		<div class="suggest-card-image-zone">
 			<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" alt="photo">
 		</div>
-		<p class="suggest-card-description">{{ product.name|capitalize|slice(0, 22) ~ '...'}}</p>
+		{% if product.name|length > 22 %}
+			<p class="suggest-card-description">{{ product.name|capitalize|slice(0, 22) ~ '...'}}</p>
+		{% else %}
+			<p class="suggest-card-description">{{ product.name|capitalize }}</p>
+		{% endif %}
 		<p class="suggest-card-price">{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
 			{% if product.originPrice %}
 				<span>{{ product.originPrice / 100 }}
