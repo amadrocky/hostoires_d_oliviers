@@ -245,9 +245,12 @@ class OrdersController extends AbstractController
             }
 
             $this->mailer->sendInBlueEmail(
-                'histoiresdoliviers@gmail.com',
+                'amadou.kane.dev@gmail.com',
                 4,
-                []
+                [
+                    'COMMANDE' => $order->getNumber(),
+                    'NOM' => $order->getName(),
+                ]
             );
             
             $request->getSession()->clear();
