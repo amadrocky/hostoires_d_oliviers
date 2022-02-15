@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Products;
+use App\Entity\Orders;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
 use App\Repository\OrdersRepository;
@@ -207,6 +208,19 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/orders/index.html.twig', [
             'orders' => $this->ordersRepository->findBy(['workflowState' => 'paid'], ['modifiedAt' => 'DESC'])
+        ]);
+    }
+
+    /**
+     * @Route("/commandes/{number}", name="orders_show", methods={"GET"})
+     *
+     * @param Orders $product
+     * @return Response
+     */
+    public function ordersShow(Orders $order): Response
+    {
+        return $this->render('admin/orders/show.html.twig', [
+            'order' => $order,
         ]);
     }
 }

@@ -38,7 +38,7 @@
 							<span class="badge rounded-pill bg-primary">{{ order.workflowState }}</span>
 						</td>
 						<td>
-							<a href="" class="btn btn-outline-dark">
+							<a href="{{ path('admin_orders_show', {'number': order.number}) }}" class="btn btn-outline-dark">
 								<i class="fas fa-eye"></i>
 							</a>
 						</td>

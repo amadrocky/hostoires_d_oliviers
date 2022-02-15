@@ -1,0 +1,106 @@
+{% extends 'admin/adminLayout.html.twig' %}
+
+{% block title %}Consulter une commande
+{% endblock %}
+
+{% block content %}
+	<div class="table">
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>id</th>
+				<td>{{ order.id }}</td>
+			</tr>
+			<tr>
+				<th>Numéro</th>
+				<td>{{ order.number }}</td>
+			</tr>
+			<tr>
+				<th>Prix</th>
+				<td>{{ (order.amount / 100)|number_format(2, ',') }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ order.name|capitalize }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ order.email }}</td>
+			</tr>
+			<tr>
+				<th>Téléphone</th>
+				<td>{{ order.phoneNumber }}</td>
+			</tr>
+			<tr>
+				<th>Adresse (facturation)</th>
+				<td>{{ order.billingAddress }}</td>
+			</tr>
+			{% if order.billingComplement %}
+				<tr>
+					<th>Complement (facturation)</th>
+					<td>{{ order.billingComplement }}</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<th>Code postal (facturation)</th>
+				<td>{{ order.billingZipCode }}</td>
+			</tr>
+			<tr>
+				<th>Ville (facturation)</th>
+				<td>{{ order.billingCity }}</td>
+			</tr>
+			{% if order.isDelivery %}
+				<tr>
+					<th>Livraison</th>
+					<td>
+						{% if order.isDelivery %}
+							<span class="badge rounded-pill bg-success">Livraison</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Adresse (livraison)</th>
+					<td>{{ order.address }}</td>
+				</tr>
+				{% if order.complement %}
+					<tr>
+						<th>Complement (livraison)</th>
+						<td>{{ order.complement }}</td>
+					</tr>
+				{% endif %}
+				<tr>
+					<th>Code postal (livraison)</th>
+					<td>{{ order.zipCode }}</td>
+				</tr>
+				<tr>
+					<th>Ville (livraison)</th>
+					<td>{{ order.city }}</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<th>Produits</th>
+				<td>
+					{% for product in order.products %}
+						<div class="d-flex">
+							<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="miniature mx-2" alt="miniature">
+							<p class="my-auto">{{ product.name }}</p>
+						</div>
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<th>Date de création</th>
+				<td>{{ order.createdAt|date('d-m-Y H:i') }}</td>
+			</tr>
+			<tr>
+				<th>Date de modification</th>
+				<td>{{ order.modifiedAt|date('d-m-Y H:i') }}</td>
+			</tr>
+			<tr>
+				<th>Statut</th>
+				<td>
+					<span class="badge rounded-pill bg-primary">{{ order.workflowState }}</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}
