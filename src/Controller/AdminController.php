@@ -223,4 +223,28 @@ class AdminController extends AbstractController
             'order' => $order,
         ]);
     }
+
+    /**
+     * @Route("/utilisateurs", name="users", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function usersIndex(): Response
+    {
+        return $this->render('admin/users/index.html.twig', [
+            'users' => $this->userRepository->findBy([], ['createdAt' => 'DESC'])
+        ]);
+    }
+
+    /**
+     * @Route("/messages", name="contact", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function messagesIndex(): Response
+    {
+        return $this->render('admin/messages/index.html.twig', [
+            'messages' => $this->contactRepository->findBy([], ['createdAt' => 'DESC'])
+        ]);
+    }
 }

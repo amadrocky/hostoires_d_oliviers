@@ -7,9 +7,9 @@
 	<div class="container">
 		<div class="white-block">
 			<div class="col-12 alert alert-warning alert-dismissible fade show" role="alert">
-				Livraisons et plantations dans un rayon de
+				Livraison et plantation dans un rayon de
 				<b>30 km d'Orléans</b>. Pour plus d'informations, merci de consulter nos
-				<a href="">conditions générales de ventes</a>.
+				<a href="{{ path('CGU') }}" target="_blank">conditions générales de ventes</a>.
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 			<div class="p-3">
@@ -50,7 +50,7 @@
 											<input type="email" class="form-control" name="user_email" placeholder="Email" {% if app.user %} value="{{ app.user.email }}" {% endif %} required>
 										</div>
 										<div class="col-12 col-md-6 my-2">
-											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone" {% if app.user %} value="{{ app.user.phoneNumber }}" {% endif %}>
+											<input type="text" class="form-control" name="user_phone_number" placeholder="Téléphone" {% if app.user %} value="{{ app.user.phoneNumber }}" {% endif %} required>
 										</div>
 									</div>
 								</div>
@@ -88,16 +88,16 @@
 									<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
 										<div class="accordion-body row">
 											<div class="col-12 my-2">
-												<input type="text" class="form-control" name="user_billing_address" placeholder="Adresse" {% if app.user %} value="{{ app.user.adress }}" {% endif %} required>
+												<input type="text" class="form-control" name="user_address" placeholder="Adresse" {% if app.user %} value="{{ app.user.adress }}" {% endif %} required>
 											</div>
 											<div class="col-12 my-2">
-												<input type="text" class="form-control" name="user_billing_complement" placeholder="Complément" {% if app.user %} value="{{ app.user.complement }}" {% endif %}>
+												<input type="text" class="form-control" name="user_complement" placeholder="Complément" {% if app.user %} value="{{ app.user.complement }}" {% endif %}>
 											</div>
 											<div class="col-12 col-md-6 my-2">
-												<input type="integer" class="form-control" name="user_billing_zip_code" placeholder="Code Postal" {% if app.user %} value="{{ app.user.zipCode }}" {% endif %} required>
+												<input type="integer" class="form-control" name="user_zip_code" placeholder="Code Postal" {% if app.user %} value="{{ app.user.zipCode }}" {% endif %} required>
 											</div>
 											<div class="col-12 col-md-6 my-2">
-												<input type="text" class="form-control" name="user_billing_city" placeholder="Ville" {% if app.user %} value="{{ app.user.city }}" {% endif %} required>
+												<input type="text" class="form-control" name="user_city" placeholder="Ville" {% if app.user %} value="{{ app.user.city }}" {% endif %} required>
 											</div>
 										</div>
 									</div>

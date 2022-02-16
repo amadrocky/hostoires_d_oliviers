@@ -53,7 +53,15 @@
 					<th>Livraison</th>
 					<td>
 						{% if order.isDelivery %}
-							<span class="badge rounded-pill bg-success">Livraison</span>
+							<span class="badge rounded-pill bg-primary">Livraison</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Plantation</th>
+					<td>
+						{% if order.isPlanting %}
+							<span class="badge rounded-pill bg-success">Plantation</span>
 						{% endif %}
 					</td>
 				</tr>
@@ -81,8 +89,8 @@
 				<td>
 					{% for product in order.products %}
 						<div class="d-flex mb-1">
-							<img src="{{ asset('images/products/') }}{{ product.pictures[0] }}" class="miniature mx-2" alt="miniature">
-							<p class="my-auto">{{ product.name }}</p>
+							<img src="{{ asset('images/products/') }}{{ product['picture'] }}" class="miniature mx-2" alt="miniature">
+							<p class="my-auto">{{ product['name'] }}</p>
 						</div>
 					{% endfor %}
 				</td>

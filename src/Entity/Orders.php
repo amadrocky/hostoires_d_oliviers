@@ -45,11 +45,6 @@ class Orders
     private $workflowState;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Products::class, mappedBy="orders")
-     */
-    private $products;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
@@ -109,9 +104,19 @@ class Orders
      */
     private $isDelivery;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPlanting;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $products = [];
+
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->products = [];
     }
 
     public function getId(): ?int
@@ -275,33 +280,6 @@ class Orders
         return $this;
     }
 
-    /**
-     * @return Collection|Products[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Products $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Products $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeOrder($this);
-        }
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -353,11 +331,35 @@ class Orders
     public function hasTree(): bool
     {
         foreach ($this->getProducts() as $product){
-            if ($product->getCategory()->getId() !== 3) {
+            if ($product['category'] !== 3) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function getIsPlanting(): ?bool
+    {
+        return $this->isPlanting;
+    }
+
+    public function setIsPlanting(?bool $isPlanting): self
+    {
+        $this->isPlanting = $isPlanting;
+
+        return $this;
+    }
+
+    public function getProducts(): ?array
+    {
+        return $this->products;
+    }
+
+    public function setProducts(?array $products): self
+    {
+        $this->products = $products;
+
+        return $this;
     }
 }

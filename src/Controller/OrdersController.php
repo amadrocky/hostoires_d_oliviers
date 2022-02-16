@@ -53,13 +53,18 @@ class OrdersController extends AbstractController
         $orderAmount = $_POST['amount'];
 
         foreach($products as $product) {
-            $orderItems[] = $this->productsRepository->find(intval($product['id']));
+            for ($i = 0; $i < intval($product['quantity']); $i++) {
+                $orderItems[] = [
+                    'category' => $this->productsRepository->find(intval($product['id']))->getCategory()->getId(),
+                    'name' => $this->productsRepository->find(intval($product['id']))->getName(),
+                    'price' => $this->productsRepository->find(intval($product['id']))->getPrice(),
+                    'picture' => $this->productsRepository->find(intval($product['id']))->getPictures()[0]
+                ];
+            }
         }
 
-        foreach($orderItems as $orderItem) {
-            $order->addProduct($orderItem);
-        }
-        
+        $order->setProducts($orderItems);
+
         $order->setAmount(intval($orderAmount));
         
         $order->setCreatedAt($date);
@@ -98,7 +103,9 @@ class OrdersController extends AbstractController
                     if ($_POST['delivery'] == "2") {
                         $amount = $amount + self::PLANTING;
                         $order->setIsDelivery(true);
+                        $order->setIsPlanting(true);
                     }
+                    
                 }
             }
 
@@ -138,10 +145,7 @@ class OrdersController extends AbstractController
             $order->setBillingComplement($_POST['user_billing_complement']);
             $order->setBillingZipCode($_POST['user_billing_zip_code']);
             $order->setBillingCity($_POST['user_billing_city']);
-
-            if ($_POST['user_phone_number']) {
-                $order->setPhoneNumber($_POST['user_phone_number']);
-            }
+            $order->setPhoneNumber($_POST['user_phone_number']);
 
             if (isset($_POST['user_address'])) {
                 $order->setAddress($_POST['user_address']);

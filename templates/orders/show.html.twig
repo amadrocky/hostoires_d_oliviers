@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="white-block">
 			<div class="col-12 alert alert-warning alert-dismissible fade show" role="alert">
-				Livraisons et plantations dans un rayon de
+				Livraison et plantation dans un rayon de
 				<b>30 km d'Orléans</b>. Pour plus d'informations, merci de consulter nos
 				<a href="{{ path('CGU') }}" target="_blank">conditions générales de ventes</a>.
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -52,11 +52,11 @@
 								et plantation
 							{% endif %}
 						</h3>
+						<div>
+							<input type="radio" id="none" name="delivery" value="0" checked>
+							<label for="planting">Retrait sur site</label>
+						</div>
 						{% if order.hasTree %}
-							<div>
-								<input type="radio" id="none" name="delivery" value="0" checked>
-								<label for="planting">Retrait sur site</label>
-							</div>
 							<div>
 								<input type="radio" id="delivery" name="delivery" value="1">
 								<label for="delivery">Livraison (+ 130 €)</label>

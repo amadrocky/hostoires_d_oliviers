@@ -13,6 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.10",
         "endroid/qr-code": "3.9.7",
+        "phpcollection/phpcollection": "^0.5.0",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sendinblue/api-v3-sdk": "^8.0",
         "sensio/framework-extra-bundle": "^6.1",

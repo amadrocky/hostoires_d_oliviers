@@ -106,11 +106,6 @@ class Products
     private $quantity;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Orders::class, inversedBy="products")
-     */
-    private $orders;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mainAttribute4;
@@ -330,30 +325,6 @@ class Products
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Orders[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): self
-    {
-        $this->orders->removeElement($order);
 
         return $this;
     }
