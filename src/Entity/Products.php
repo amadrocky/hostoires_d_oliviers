@@ -115,11 +115,6 @@ class Products
      */
     private $mainAttribute5;
 
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
