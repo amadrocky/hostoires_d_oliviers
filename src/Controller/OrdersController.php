@@ -91,7 +91,7 @@ class OrdersController extends AbstractController
             $date = new \DateTime();
             $amount = intval($_POST['amount']);
             
-            if (isset($_POST['free'])) {
+            if ((isset($_POST['delivery']) && ($_POST['delivery'] === 'free'))) {
                 $order->setIsDelivery(true);
             } else {
                 if (isset($_POST['delivery'])) {

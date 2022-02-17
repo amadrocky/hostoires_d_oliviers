@@ -54,7 +54,7 @@
 						</h3>
 						<div>
 							<input type="radio" id="none" name="delivery" value="0" checked>
-							<label for="planting">Retrait sur site</label>
+							<label for="none">Retrait sur site</label>
 						</div>
 						{% if order.hasTree %}
 							<div>
@@ -67,7 +67,7 @@
 							</div>
 						{% else %}
 							<div>
-								<input type="checkbox" id="free" name="free">
+								<input type="radio" id="free" name="delivery" value="free">
 								<label for="free">Livraison offerte *</label>
 								<div>
 									<small class="text-muted">* Livraison offerte sur les produits de décoration (cochez la case pour séléctionner)</small>
