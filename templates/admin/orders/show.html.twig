@@ -16,7 +16,8 @@
 			</tr>
 			<tr>
 				<th>Prix</th>
-				<td>{{ (order.amount / 100)|number_format(2, ',') }}</td>
+				<td>{{ (order.amount / 100)|number_format(2, ',') }}
+					€</td>
 			</tr>
 			<tr>
 				<th>Nom</th>
@@ -90,7 +91,14 @@
 					{% for product in order.products %}
 						<div class="d-flex mb-1">
 							<img src="{{ asset('images/products/') }}{{ product['picture'] }}" class="miniature mx-2" alt="miniature">
-							<p class="my-auto">{{ product['name'] }}</p>
+							<div class="my-auto flex-fill">
+								<p>{{ product['name'] }}</p>
+								<p>{{ product['mainDescription'] }}</p>
+							</div>
+							<div class="my-auto">
+							<p>{{ (product['price'] / 100)|number_format(2, ',') }}
+								€</p>
+								</div>
 						</div>
 					{% endfor %}
 				</td>

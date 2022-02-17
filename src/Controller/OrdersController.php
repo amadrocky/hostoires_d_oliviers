@@ -57,6 +57,7 @@ class OrdersController extends AbstractController
                 $orderItems[] = [
                     'category' => $this->productsRepository->find(intval($product['id']))->getCategory()->getId(),
                     'name' => $this->productsRepository->find(intval($product['id']))->getName(),
+                    'mainDescription' => $this->productsRepository->find(intval($product['id']))->getMainDescription(),
                     'price' => $this->productsRepository->find(intval($product['id']))->getPrice(),
                     'picture' => $this->productsRepository->find(intval($product['id']))->getPictures()[0]
                 ];
