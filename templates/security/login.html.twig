@@ -7,9 +7,9 @@
 	<div class="container page">
 		<div class="white-block">
 			<div class="row justify-content-center p-3">
-            <h2 class="text-center">Connexion</h2>
+				<h2 class="text-center">Connexion</h2>
 				<div class="col col-md-4">
-					<form method="post">
+					<form id="login" class="fade-in" method="post">
 						{% if error %}
 							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 						{% endif %}
@@ -23,23 +23,53 @@
 						type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 						{#
-                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                            See https://symfony.com/doc/current/security/remember_me.html
-                    
-                            <div class="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" name="_remember_me"> Remember me
-                                </label>
-                            </div>
-                        #}
-
-						<button class="btn btn-lg btn-secondary mb-2" type="submit">
-							Connexion
-						</button>
-                        <a href="{{ path('app_register') }}" class="btn btn-success btn-lg mb-2">Créer un compte</a>
+																																										                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																																										                            See https://symfony.com/doc/current/security/remember_me.html
+																																										                    
+																																										                            <div class="checkbox mb-3">
+																																										                                <label>
+																																										                                    <input type="checkbox" name="_remember_me"> Remember me
+																																										                                </label>
+																																										                            </div>
+																																										                        #}
+						<div class="text-end mb-3">
+							<button type="button" class="btn btn-link btn-sm text-dark btn-block box-shadow" onclick="forgot()">Mot de passe oublié ?</button>
+						</div>
+						<div class="d-grid gap-2">
+							<button class="btn btn-lg btn-secondary btn-block mb-2" type="submit">
+								Connexion
+							</button>
+							<a href="{{ path('app_register') }}" class="btn btn-success btn-lg btn-block mb-2">Créer un compte</a>
+						</div>
 					</form>
+					<div id="recover" class="fade-in d-none">
+						<form action="" method="post">
+							<div class="alert alert-info box-shadow" role="alert">
+								<i class="fas fa-info-circle"></i>
+								Entrez votre adresse email puis validez. Un email vous sera envoyé. Suivez les instructions fournies pour réinitialiser votre mot de passe.
+							</div>
+							<input type="email" name="email" id="inputForgotEmail" class="form-control mb-2" required placeholder="Adresse email">
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary mt-3" type="submit">
+									Envoyer
+								</button>
+							</div>
+						</form>
+						<button class="btn btn-link btn-sm mt-3" onclick="loginShow()">Retour à l'indentification</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		function forgot() {
+document.getElementById('login').classList.add('d-none');
+document.getElementById('recover').classList.remove('d-none');
+}
+function loginShow() {
+document.getElementById('recover').classList.add('d-none');
+document.getElementById('login').classList.remove('d-none');
+}
+	</script>
 {% endblock %}
