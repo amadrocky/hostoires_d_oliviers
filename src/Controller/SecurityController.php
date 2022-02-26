@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -18,9 +19,16 @@ class SecurityController extends AbstractController
      */
     private $mailer;
 
-    public function __construct(MailerService $mailer) 
+    /**
+     *
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    public function __construct(MailerService $mailer, UserRepository $userRepository) 
     {
         $this->mailer = $mailer;
+        $this->userRepository = $userRepository;
     }
 
    /**
@@ -93,6 +101,83 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
             'user' => $this->getUser(),
         ]);
+    }
+
+    /**
+     * Send a mail for modify password
+     * 
+     * @Route("/recover", name="recover", methods={"POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function forgotPassword(Request $request): Response
+    {
+        $email = $request->request->get('email');
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+
+        if ($user) {
+            $em = $this->getDoctrine()->getManager();
+            $user->setToken($this->generateToken());
+            $em->persist($user);
+            $em->flush();
+
+            $this->mailer->sendInBlueEmail(
+                $user->getEmail(),
+                6,
+                [
+                    'PRENOM' => $user->getFirstname(),
+                    'TOKEN' => $user->getToken()
+                ]
+            );
+        }
+
+        $this->addFlash('success', 'Un email a été envoyé à votre adresse.');
+
+        return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * Create a new password
+     * 
+     * @Route("/reset-password/{token}", name="reset_password", methods={"GET","POST"})
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     */
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this->userRepository->findOneBy(['token' => $token]);
+
+        if ($user) {
+            $form = $this->createForm(ResetPasswordType::class, $user);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $user->setPassword($passwordEncoder->encodePassword(
+                    $user,
+                    $user->getPassword()
+                ));
+                $user->setModifiedAt(new \DateTime());
+                $user->setToken(null);
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('success', 'Votre mot de passe à bien été modifié.');
+
+                return $this->redirectToRoute('home');
+            }
+
+            return $this->render('security/resetPassword.html.twig', [
+                'form' => $form->createView(),
+                'user' => $this->getUser(),
+                'messages' => null
+            ]);
+        } else {
+            return $this->redirectToRoute('home');
+        }
     }
 
     /**

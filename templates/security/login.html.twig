@@ -9,6 +9,14 @@
 			<div class="row justify-content-center p-3">
 				<h2 class="text-center">Connexion</h2>
 				<div class="col col-md-4">
+					{% for label, messages in app.flashes %}
+						{% for message in messages %}
+							<div class="col-12 alert alert-info alert-dismissible fade show" role="alert">
+								{{ message }}
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						{% endfor %}
+					{% endfor %}
 					<form id="login" class="fade-in" method="post">
 						{% if error %}
 							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -23,15 +31,15 @@
 						type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 						{#
-																																										                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-																																										                            See https://symfony.com/doc/current/security/remember_me.html
-																																										                    
-																																										                            <div class="checkbox mb-3">
-																																										                                <label>
-																																										                                    <input type="checkbox" name="_remember_me"> Remember me
-																																										                                </label>
-																																										                            </div>
-																																										                        #}
+																																																                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																																																                            See https://symfony.com/doc/current/security/remember_me.html
+																																																                    
+																																																                            <div class="checkbox mb-3">
+																																																                                <label>
+																																																                                    <input type="checkbox" name="_remember_me"> Remember me
+																																																                                </label>
+																																																                            </div>
+																																																                        #}
 						<div class="text-end mb-3">
 							<button type="button" class="btn btn-link btn-sm text-dark btn-block box-shadow" onclick="forgot()">Mot de passe oublié ?</button>
 						</div>
@@ -43,7 +51,7 @@
 						</div>
 					</form>
 					<div id="recover" class="fade-in d-none">
-						<form action="" method="post">
+						<form action="{{ path('recover') }}" method="post">
 							<div class="alert alert-info box-shadow" role="alert">
 								<i class="fas fa-info-circle"></i>
 								Entrez votre adresse email puis validez. Un email vous sera envoyé. Suivez les instructions fournies pour réinitialiser votre mot de passe.

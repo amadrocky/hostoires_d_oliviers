@@ -42,7 +42,9 @@ class AdminController extends AbstractController
             'countProducts' => count($this->productsRepository->findByWorkflowState('active')),
             'countOrders' => count($this->ordersRepository->findByWorkflowState('paid')),
             'countUsers' => count($this->userRepository->findAll()),
-            'countMessages' => count($this->contactRepository->findByWorkflowState('active'))
+            'countMessages' => count($this->contactRepository->findByWorkflowState('active')),
+            'ordersDatas' => $this->getDatas($this->ordersRepository),
+            'usersDatas' => $this->getDatas($this->userRepository)
         ]);
     }
 
@@ -246,5 +248,30 @@ class AdminController extends AbstractController
         return $this->render('admin/messages/index.html.twig', [
             'messages' => $this->contactRepository->findBy([], ['createdAt' => 'DESC'])
         ]);
+    }
+
+    /**
+     * Génère les datas pour les graphiques
+     *
+     * @param [type] $repository
+     * @return array
+     */
+    private function getDatas($repository): array
+    {
+        $firstDay = (new \DateTime)->modify('- 7 days')->setTime(00, 00);
+
+        // Total par jour de la semaine courante
+        for ($i=0; $i<7; $i++) {
+            $weekDatas[(new \DateTime)->setTimestamp($firstDay->getTimestamp())->modify('+'.$i.'day')->format('d/m')] = count(
+                $repository->findByPeriod(
+                    (new \DateTime)->setTimestamp($firstDay->getTimestamp())->modify('+'.$i.'day'),
+                    (new \DateTime)->setTimestamp($firstDay->getTimestamp())->modify('+'.$i.'day')->setTime(23, 59, 59)
+                )
+            );
+        }
+
+        return [
+            'datas' => $weekDatas
+        ];
     }
 }

@@ -5,6 +5,14 @@
 
 {% block content %}
 	<h1>Éspace administration</h1>
+	<div class="row">
+		<div class="col">
+			<canvas id="ordersChart"></canvas>
+		</div>
+		<div class="col">
+			<canvas id="usersChart"></canvas>
+		</div>
+	</div>
 	<div class="row indicators">
 		<div class="col admin-number">
 			<div class="indicator">
@@ -39,4 +47,88 @@
             </a>
 		</div>
 	</div>
+	
+	<script>
+		var ctx = document.getElementById('ordersChart');
+		var offersChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [
+					{% for key in ordersDatas['datas']|keys %}
+						'{{ key }}',
+					{% endfor %}
+				],
+				datasets: [{
+					data: [
+						{% for order in ordersDatas['datas'] %}
+							{{ order }},
+						{% endfor %}
+					],
+					backgroundColor: [
+						{% for order in ordersDatas['datas'] %}
+							'rgb(198, 175, 122)',
+						{% endfor %}
+					]
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					title: {
+						display: true,
+						text: 'Total des commandes'
+					},
+					legend: {
+						display: false,
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+
+		var ctx = document.getElementById('usersChart');
+		var offersChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [
+					{% for key in usersDatas['datas']|keys %}
+						'{{ key }}',
+					{% endfor %}
+				],
+				datasets: [{
+					data: [
+						{% for order in usersDatas['datas'] %}
+							{{ order }},
+						{% endfor %}
+					],
+					backgroundColor: [
+						{% for order in usersDatas['datas'] %}
+							'rgb(198, 175, 122)',
+						{% endfor %}
+					]
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					title: {
+						display: true,
+						text: 'Nouveaux utilisateurs'
+					},
+					legend: {
+						display: false,
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+	</script>
 {% endblock %}
