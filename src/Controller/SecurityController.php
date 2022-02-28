@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\ResetPasswordType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -141,8 +142,9 @@ class SecurityController extends AbstractController
      * Create a new password
      * 
      * @Route("/reset-password/{token}", name="reset_password", methods={"GET","POST"})
-     *
+     * 
      * @param Request $request
+     * @param string $token
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
@@ -172,8 +174,7 @@ class SecurityController extends AbstractController
 
             return $this->render('security/resetPassword.html.twig', [
                 'form' => $form->createView(),
-                'user' => $this->getUser(),
-                'messages' => null
+                'user' => $this->getUser()
             ]);
         } else {
             return $this->redirectToRoute('home');
