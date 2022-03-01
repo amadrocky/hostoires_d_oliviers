@@ -40,13 +40,24 @@
 						{% if app.session.get('cartProducts')|length > 0 %}
 							<i class="fas fa-circle"></i>
 						{% endif %}
-						<a href="{{ path('cart_index') }}"><i class="fas fa-shopping-cart"></i></a>
+						<a href="{{ path('cart_index') }}">
+							<i class="fas fa-shopping-cart"></i>
+						</a>
 					</li>
 					<li class="nav-item p-2">
 						<a href="{{ path('account_index') }}">
 							<i class="fas fa-user"></i>
 						</a>
 					</li>
+					{% if app.user %}
+						{% if is_granted('ROLE_ADMIN') == true %}
+							<li class="nav-item p-2">
+								<a href="{{ path('admin_index') }}">
+									<i class="fas fa-cog"></i>
+								</a>
+							</li>
+						{% endif %}
+					{% endif %}
 				</ul>
 			</div>
 		</div>

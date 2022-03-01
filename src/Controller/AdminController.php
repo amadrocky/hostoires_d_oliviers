@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Products;
 use App\Entity\Orders;
+use App\Entity\User;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
 use App\Repository\OrdersRepository;
@@ -235,6 +236,21 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/users/index.html.twig', [
             'users' => $this->userRepository->findBy([], ['createdAt' => 'DESC'])
+        ]);
+    }
+
+    /**
+     * @Route("/utilisateurs/{id}", name="users_show", methods={"GET"})
+     *
+     * @param User $user
+     * @return Response
+     */
+    public function usersShow(User $user): Response
+    {
+        return $this->render('admin/users/show.html.twig', [
+            'user' => $user,
+            'orders' => $this->ordersRepository->findByEmail($user->getEmail()),
+            'messages' => $this->contactRepository->findByEmail($user->getEmail())
         ]);
     }
 
