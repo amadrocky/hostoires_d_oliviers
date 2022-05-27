@@ -104,8 +104,11 @@ p {
         border-radius: 10px 0 0 10px;
     }
     .product-text {
+        display: flex;
+        flex-direction: column;
         padding: 10px;
         font-size: 2vw;
+        width: 100%;
         .product-title {
             font-family: 'Noto Serif Display', serif;
             font-size: 25px;
@@ -149,7 +152,7 @@ p {
         list-style-type: none;
         margin-bottom: 10px;
         li {
-            font-size: 8px;
+            font-size: 0.7vw;
         }
     }
 }

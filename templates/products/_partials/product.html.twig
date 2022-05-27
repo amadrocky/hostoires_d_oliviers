@@ -9,7 +9,7 @@
 		<div class="product-text">
 			<p class="product-title">{{ product.name|capitalize }}</p>
 			<p class="product-description">{{ product.mainDescription }}</p>
-			<div class="product-details">
+			<div class="product-details flex-fill">
 				<div class="product-price">
 					<p>{{ product.price / 100 }}<sup>€{{ product.price|slice(-2) }}</sup>
 						{% if product.originPrice %}
